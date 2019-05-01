@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 3.0.0">
+  <meta name="generator" content="Hugo 0.53" />
+  <meta name="author" content="Артур Суилин">
+
+  
+  
+  
+  
+    
+  
+  <meta name="description" content="th { text-align: right; }  В ходе работы над последним проектом мне понадобилось в промышленных масштабах генерировать сэмплы из бета-распределения. Первое что пришло в голову, это scipy.stat, тем более там есть куча дополнительных возможностей: и CDF, и квантили, и MLE, и всё, что душа пожелает. Но довольно быстро я понял, что scipy нетороплив, и генерация нескольких миллиардов сэмплов затянется на часы, а то и на дни. Стал искать альтернативные варианты и хочу теперь поделиться найденным.">
+
+  
+  <link rel="alternate" hreflang="ru" href="https://suilin.ru/post/sampling_performance/">
+
+  
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#086377">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous">
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Fira+Sans+Condensed:400,400italic,700|PT+Mono|Fira+Sans|PT+Serif:400,400italic,700">
+  
+
+  <link rel="stylesheet" href="/styles.css">
+  
+  <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-38480657-1', 'auto');
+      
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="//www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
+  
+
+  
+  <link rel="alternate" href="https://suilin.ru/index.xml" type="application/rss+xml" title="Артур Суилин">
+  <link rel="feed" href="https://suilin.ru/index.xml" type="application/rss+xml" title="Артур Суилин">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="https://suilin.ru/post/sampling_performance/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@asuilin">
+  <meta property="twitter:creator" content="@asuilin">
+  
+  <meta property="og:site_name" content="Артур Суилин">
+  <meta property="og:url" content="https://suilin.ru/post/sampling_performance/">
+  <meta property="og:title" content="Эффективное сэмплирование распределений на Python | Артур Суилин">
+  <meta property="og:description" content="th { text-align: right; }  В ходе работы над последним проектом мне понадобилось в промышленных масштабах генерировать сэмплы из бета-распределения. Первое что пришло в голову, это scipy.stat, тем более там есть куча дополнительных возможностей: и CDF, и квантили, и MLE, и всё, что душа пожелает. Но довольно быстро я понял, что scipy нетороплив, и генерация нескольких миллиардов сэмплов затянется на часы, а то и на дни. Стал искать альтернативные варианты и хочу теперь поделиться найденным.">
+  
+  
+    
+  <meta property="og:image" content="https://suilin.ru/img/me_sq.jpg">
+  <meta property="og:locale" content="ru">
+  
+  <meta property="article:published_time" content="2018-12-10T00:00:00&#43;03:00">
+  
+  <meta property="article:modified_time" content="2018-12-10T00:00:00&#43;03:00">
+  
+
+  
+
+  <meta property="og:type" content="article"/>
+<meta name="yandex-verification" content="5753f991e1c3d96c" />
+<meta name="google-site-verification" content="5sd_7MZqiS3rR-1B3f-FqUkrWEd92TYr9FNEGkFE14I" />
+
+<script type="text/javascript" >
+  (function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+      try {
+        w.yaCounter21550249 = new Ya.Metrika2({
+          id:21550249,
+          clickmap:true,
+          trackLinks:true,
+          accurateTrackBounce:true,
+          webvisor:true
+        });
+      } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+      s = d.createElement("script"),
+      f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = "https://mc.yandex.ru/metrika/tag.js";
+
+    if (w.opera == "[object Opera]") {
+      d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+  })(document, window, "yandex_metrika_callbacks2");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/21550249" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+
+
+  <title>Эффективное сэмплирование распределений на Python | Артур Суилин</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Артур Суилин</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Переключить навигацию">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/">
+            
+            <span>Главная</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/post/">
+            
+            <span>Блог</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/project/">
+            
+            <span>Проекты</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#contact">
+            
+            <span>Контакты</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">Эффективное сэмплирование распределений на Python</h1>
+
+  
+
+  
+    
+
+<div class="article-metadata">
+
+  
+  
+  <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Артур Суилин">
+  </span>
+  
+
+  <span class="article-date">
+    
+    <meta content="2018-12-10 00:00:00 &#43;0300 MSK" itemprop="datePublished">
+    <time datetime="2018-12-10 00:00:00 &#43;0300 MSK" itemprop="dateModified">
+      10.12.2018
+    </time>
+  </span>
+  <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Артур Суилин">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    6 min read
+  </span>
+  
+
+  
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder"></i>
+    
+    <a href="/categories/performance/">Performance</a>, 
+    
+    <a href="/categories/programming/">Programming</a>
+    
+  </span>
+  
+  
+
+  
+  
+
+  
+
+</div>
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+<p><style>
+th {
+    text-align: right;
+}
+</style>
+В ходе работы над последним проектом мне понадобилось в промышленных
+масштабах генерировать сэмплы из бета-распределения. Первое что пришло
+в голову, это <code>scipy.stat</code>, тем более там есть куча дополнительных
+возможностей: и CDF, и квантили, и MLE, и всё, что душа пожелает. Но довольно
+быстро я понял, что <code>scipy</code> нетороплив, и генерация нескольких
+миллиардов сэмплов затянется на часы, а то и на дни. Стал искать
+альтернативные варианты и хочу теперь поделиться найденным.</p>
+
+<h2 id="numpy-random">numpy.random</h2>
+
+<p>Сначала выяснилось, что <code>numpy.random</code> умеет генерировать не только
+равномерные случайные числа, но и сэмплы из распределений. И делает
+это бодрее, чем <code>scipy.stat</code>, особенно на небольших выборках: по видимому,
+у <code>scipy.stat</code> большие накладные расходы на каждый вызов.</p>
+
+<h2 id="mkl-random">mkl_random</h2>
+
+<p>Совершенно случайно наткнулся на возможность генерации сэмплов в <a href="https://software.intel.com/en-us/mkl" target="_blank">Intel MKL</a>.
+MKL это вообще такой подводный айсберг, в котором есть много всякого
+хорошего, но мало кто об этом знает. Почему то Intel его не продвигает,
+или просто не умеет продвигать?</p>
+
+<p>Ребята крайне серьезно подошли к вопросу генерации сэмплов, для каждого распределения есть <a href="https://software.intel.com/en-us/mkl-vsperfdata" target="_blank">замеры
+производительности</a> при разных значениях параметров распределений и при
+разных настройках базового генератора случайных чисел. Алгоритмически там
+тоже всё круто, для бета распределения в зависимости от параметров распределения происходит
+переключение аж между четырьмя различными алгоритмами генерации сэмплов:
+у каждого алгоритма есть своя оптимальная область параметров, в которой
+алгоритм даёт наилучшее быстродействие и качество.</p>
+
+<p>В Питоне генератор сэмплов доступен как библиотека <a href="https://anaconda.org/anaconda/mkl_random" target="_blank">mkl_random</a>,
+причём есть еще <a href="https://github.com/IntelPython/mkl_random" target="_blank">такая инкарнация</a>, которая при установке
+попытается притащить с собой весь дистрибутив Intel Python.
+Потом выяснилось, что мне вообще ничего не надо устанавливать, mkl_random по видимому идёт в стандартной
+поставке Conda. Ещё mkl_random прорастает в numpy в виде пакета <code>numpy.random_intel</code>,
+но происходит это всегда, или при особом положении звёзд, я так и не понял.</p>
+
+<p>В плане производительности всё превосходно, по сравнению с <code>numpy.random</code> разница примерно на порядок.
+Собственно, это лучший вариант для генерации сэмплов на CPU. Ещё одна приятная
+возможность &ndash; можно менять базовый алгоритм генерации случайных чисел,
+есть быстрые генераторы, оптимизированные под процессоры с поддержкой SIMD.
+Переключение генератора совмещено с seed:</p>
+
+<pre><code class="language-python">import mkl_random
+
+# SIMD-oriented Fast Mersenne Twister (SFMT)
+mkl_random.seed(None, 'SFMT19937')
+</code></pre>
+
+<h2 id="cupy-random">cupy.random</h2>
+
+<p>Генерация массива сэмплов это по своей природе очень хорошо параллелизуемая операция,
+поэтому я стал искать реализацию для GPU. Реализация нашлась в лице пакета
+<a href="https://cupy.chainer.org" target="_blank">cupy</a> , имплементирующего подмножество функций numpy на GPU.
+Подмножество, кстати, весьма впечатляющее, и <code>numpy.random</code> тоже в него входит
+в виде реинкарнации <code>cupy.random</code>. Хочу выразить респект разработчикам
+Chainer/Cupy, которые не стали заново имплементировать функциональность numpy в виде собственного велосипеда с блэкджеком,
+как это сделали Tensorflow и Pytorch, а сохранили совместимость с оригинальным numpy на уровне API.</p>
+
+<p>Скорость работы просто фантастическая. На GTX1080Ti
+cupy генерирует более полумиллиарда сэмплов из бета распределения в секунду! Это больше, чем способны
+переварить остальные компоненты моего проекта.
+Апгрейдом до cupy вопрос скорости генерации сэмплов был полностью закрыт.</p>
+
+<p>Не обошлось без ложки дёгтя: в cupy некорректно работает обновление
+seed после генерации сэмпла. Seed хранится
+как 64-битный float (размером до 10<sup>308</sup>), и выставляется на старте обычно в достаточно большое число.
+После генерации сэмпла к нему добавляется целое,
+которое этому float-у как слону дробина, и не меняет его ни на единый бит.
+В итоге cupy каждый раз выдаёт один и тот же сэмпл. Пришлось выставлять seed
+вручную.</p>
+
+<h2 id="остальное">Остальное</h2>
+
+<p>Из любопытства прогнал через бенчмарк также высокоуровневые библиотеки,
+умеющие генерировать сэмплы из распределений: PyMC3, Pytorch и Tensorflow.</p>
+
+<p><strong>PyMC3</strong> показал стабильно худшие результаты среди всего, что я тестировал.
+Как это ни печально, библиотека, основная работа которой состоит в
+сэмплировании, делает это хуже всех остальных. Видимо сказывается
+возраст Theano, на котором основана вся функциональность PyMC3.</p>
+
+<p><strong>PyTorch</strong> при работе на CPU показал себя средне (на Бета распределении вообще провал),
+ но при работе на GPU вполне конкурировал с cupy, иногда отставал, иногда обгонял.</p>
+
+<p><strong>Tensorflow</strong>, как выяснилось, не умеет сэмплировать на GPU. Если запускать
+ всё с дефолтными настройками, то он будет делать вид, что работает на GPU,
+ но на самом деле будет сэмплировать <em>медленнее</em> по сравнению с честным
+ запуском на CPU, потому что будет гонять данные туда-сюда. При сэмплировании
+ на CPU показал себя хорошо, стабильное второе место после mkl_random, но
+ большие накладные расходы на каждый вызов.</p>
+
+<h1 id="результаты-тестирования">Результаты тестирования</h1>
+
+<p>Я тестировал быстродействие сэмплеров на трех распределениях,
+с параметрами, близким к используемым в моём проекте:</p>
+
+<ul>
+<li><strong>Бета распределение</strong> с параметрами $\alpha=1$, $\beta=100$</li>
+<li><strong>Распределение Пуассона</strong> с параметром $\lambda=10$</li>
+<li><strong>Нормальное распределение</strong> со стандартными параметрами $\mu=0$, $\sigma=1$,
+тестировать с другими смысла нет, т.к. такие сэмплы получаются из стандартных простым
+умножением.<br /></li>
+</ul>
+
+<p>Для cupy запускалось два варианта тестов, один с копированием результатов
+с GPU на хост, второй без копирования (т.к. результаты могут обрабатываться
+и на GPU). Вариант без копирования называется <code>cupy_nht</code> (No Host Copy).
+Разница между ними до 2х и более раз. GPU-тесты PyTorch запускались всегда
+с копированием на хост.</p>
+
+<p>Тесты проводились с переменным размером батча (т.е. сколько сэмплов
+генерируется за один вызов), варьирующимся от десяти до миллиона. Быстродействие
+всех библиотек сильно зависит от этого размера.</p>
+
+<p>Результаты приводились к количеству сэмплов, генерируемому в секунду.
+Числа в таблицах измеряются в миллионах сэмплов в секунду.</p>
+
+<h2 id="бета-распределение">Бета распределение</h2>
+
+
+
+
+<figure>
+
+<img src="beta.png" width="534" />
+
+
+</figure>
+
+<table>
+<thead>
+<tr>
+<th align="right">batch</th>
+<th align="right">scipy</th>
+<th align="right">numpy</th>
+<th align="right">mkl</th>
+<th align="right">cupy</th>
+<th align="right">cupy_nht</th>
+<th align="right">torch_cpu</th>
+<th align="right">torch_gpu</th>
+<th align="right">pymc3</th>
+<th align="right">tf_cpu</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="right">10</td>
+<td align="right">0.2</td>
+<td align="right">4.2</td>
+<td align="right">6.1</td>
+<td align="right">0.1</td>
+<td align="right">0.2</td>
+<td align="right">0.3</td>
+<td align="right">0.1</td>
+<td align="right">0.1</td>
+<td align="right">0.1</td>
+</tr>
+
+<tr>
+<td align="right">35</td>
+<td align="right">0.8</td>
+<td align="right">7.6</td>
+<td align="right">20.3</td>
+<td align="right">0.4</td>
+<td align="right">0.6</td>
+<td align="right">0.7</td>
+<td align="right">0.4</td>
+<td align="right">0.4</td>
+<td align="right">0.3</td>
+</tr>
+
+<tr>
+<td align="right">129</td>
+<td align="right">2.4</td>
+<td align="right">10.0</td>
+<td align="right">57.6</td>
+<td align="right">1.4</td>
+<td align="right">2.2</td>
+<td align="right">1.3</td>
+<td align="right">1.3</td>
+<td align="right">1.3</td>
+<td align="right">0.9</td>
+</tr>
+
+<tr>
+<td align="right">464</td>
+<td align="right">5.6</td>
+<td align="right">11.2</td>
+<td align="right">137.7</td>
+<td align="right">5.1</td>
+<td align="right">7.9</td>
+<td align="right">1.6</td>
+<td align="right">4.6</td>
+<td align="right">3.5</td>
+<td align="right">2.2</td>
+</tr>
+
+<tr>
+<td align="right">1668</td>
+<td align="right">9.0</td>
+<td align="right">11.6</td>
+<td align="right">218.1</td>
+<td align="right">18.1</td>
+<td align="right">29.1</td>
+<td align="right">1.8</td>
+<td align="right">16.3</td>
+<td align="right">7.1</td>
+<td align="right">5.5</td>
+</tr>
+
+<tr>
+<td align="right">5994</td>
+<td align="right">10.8</td>
+<td align="right">11.8</td>
+<td align="right">252.8</td>
+<td align="right">61.1</td>
+<td align="right">99.4</td>
+<td align="right">1.8</td>
+<td align="right">57.4</td>
+<td align="right">9.8</td>
+<td align="right">16.0</td>
+</tr>
+
+<tr>
+<td align="right">21544</td>
+<td align="right">11.4</td>
+<td align="right">11.6</td>
+<td align="right">267.3</td>
+<td align="right">160.7</td>
+<td align="right">367.4</td>
+<td align="right">1.9</td>
+<td align="right">123.1</td>
+<td align="right">11.1</td>
+<td align="right">30.5</td>
+</tr>
+
+<tr>
+<td align="right">77426</td>
+<td align="right">11.6</td>
+<td align="right">11.7</td>
+<td align="right">254.9</td>
+<td align="right">302.9</td>
+<td align="right">816.6</td>
+<td align="right">1.9</td>
+<td align="right">129.4</td>
+<td align="right">11.5</td>
+<td align="right">35.7</td>
+</tr>
+
+<tr>
+<td align="right">278255</td>
+<td align="right">11.4</td>
+<td align="right">11.7</td>
+<td align="right">258.7</td>
+<td align="right">456.3</td>
+<td align="right">1005.3</td>
+<td align="right">1.9</td>
+<td align="right">149.1</td>
+<td align="right">11.7</td>
+<td align="right">40.9</td>
+</tr>
+
+<tr>
+<td align="right">1000000</td>
+<td align="right">11.2</td>
+<td align="right">11.7</td>
+<td align="right">266.1</td>
+<td align="right">551.0</td>
+<td align="right">968.3</td>
+<td align="right">1.8</td>
+<td align="right">159.2</td>
+<td align="right">11.8</td>
+<td align="right">42.9</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="распределение-пуассона">Распределение Пуассона</h2>
+
+
+
+
+<figure>
+
+<img src="poisson.png" width="534" />
+
+
+</figure>
+
+<table>
+<thead>
+<tr>
+<th align="right">batch</th>
+<th align="right">scipy</th>
+<th align="right">numpy</th>
+<th align="right">mkl</th>
+<th align="right">cupy</th>
+<th align="right">cupy_nht</th>
+<th align="right">torch_cpu</th>
+<th align="right">torch_gpu</th>
+<th align="right">pymc3</th>
+<th align="right">tf_cpu</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="right">10</td>
+<td align="right">0.2</td>
+<td align="right">3.5</td>
+<td align="right">5.2</td>
+<td align="right">0.1</td>
+<td align="right">0.2</td>
+<td align="right">1.3</td>
+<td align="right">0.3</td>
+<td align="right">0.1</td>
+<td align="right">0.1</td>
+</tr>
+
+<tr>
+<td align="right">35</td>
+<td align="right">0.7</td>
+<td align="right">5.6</td>
+<td align="right">17.8</td>
+<td align="right">0.4</td>
+<td align="right">0.7</td>
+<td align="right">3.1</td>
+<td align="right">1.0</td>
+<td align="right">0.4</td>
+<td align="right">0.3</td>
+</tr>
+
+<tr>
+<td align="right">129</td>
+<td align="right">2.0</td>
+<td align="right">6.8</td>
+<td align="right">60.6</td>
+<td align="right">1.5</td>
+<td align="right">2.5</td>
+<td align="right">5.2</td>
+<td align="right">3.5</td>
+<td align="right">1.3</td>
+<td align="right">1.1</td>
+</tr>
+
+<tr>
+<td align="right">464</td>
+<td align="right">4.2</td>
+<td align="right">7.3</td>
+<td align="right">158.4</td>
+<td align="right">5.2</td>
+<td align="right">8.8</td>
+<td align="right">6.6</td>
+<td align="right">11.8</td>
+<td align="right">2.9</td>
+<td align="right">2.8</td>
+</tr>
+
+<tr>
+<td align="right">1668</td>
+<td align="right">6.0</td>
+<td align="right">7.5</td>
+<td align="right">328.9</td>
+<td align="right">18.2</td>
+<td align="right">31.8</td>
+<td align="right">7.0</td>
+<td align="right">41.5</td>
+<td align="right">4.9</td>
+<td align="right">7.5</td>
+</tr>
+
+<tr>
+<td align="right">5994</td>
+<td align="right">6.8</td>
+<td align="right">7.5</td>
+<td align="right">489.0</td>
+<td align="right">55.4</td>
+<td align="right">113.1</td>
+<td align="right">7.2</td>
+<td align="right">129.1</td>
+<td align="right">6.4</td>
+<td align="right">21.2</td>
+</tr>
+
+<tr>
+<td align="right">21544</td>
+<td align="right">7.2</td>
+<td align="right">7.6</td>
+<td align="right">520.4</td>
+<td align="right">119.1</td>
+<td align="right">227.5</td>
+<td align="right">7.3</td>
+<td align="right">365.1</td>
+<td align="right">7.0</td>
+<td align="right">47.6</td>
+</tr>
+
+<tr>
+<td align="right">77426</td>
+<td align="right">7.5</td>
+<td align="right">7.6</td>
+<td align="right">507.3</td>
+<td align="right">169.2</td>
+<td align="right">344.1</td>
+<td align="right">7.3</td>
+<td align="right">732.6</td>
+<td align="right">7.4</td>
+<td align="right">66.4</td>
+</tr>
+
+<tr>
+<td align="right">278255</td>
+<td align="right">7.6</td>
+<td align="right">7.6</td>
+<td align="right">512.9</td>
+<td align="right">209.9</td>
+<td align="right">294.7</td>
+<td align="right">7.3</td>
+<td align="right">983.8</td>
+<td align="right">7.5</td>
+<td align="right">74.7</td>
+</tr>
+
+<tr>
+<td align="right">1000000</td>
+<td align="right">7.5</td>
+<td align="right">7.6</td>
+<td align="right">531.4</td>
+<td align="right">229.7</td>
+<td align="right">282.9</td>
+<td align="right">7.3</td>
+<td align="right">1346.7</td>
+<td align="right">7.5</td>
+<td align="right">84.7</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="нормальное-распределение">Нормальное распределение</h2>
+
+
+
+
+<figure>
+
+<img src="normal.png" width="534" />
+
+
+</figure>
+
+<table>
+<thead>
+<tr>
+<th align="right">batch</th>
+<th align="right">scipy</th>
+<th align="right">numpy</th>
+<th align="right">mkl</th>
+<th align="right">cupy</th>
+<th align="right">cupy_nht</th>
+<th align="right">torch_cpu</th>
+<th align="right">torch_gpu</th>
+<th align="right">pymc3</th>
+<th align="right">tf_cpu</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="right">10</td>
+<td align="right">0.3</td>
+<td align="right">4.0</td>
+<td align="right">6.3</td>
+<td align="right">0.0</td>
+<td align="right">0.1</td>
+<td align="right">1.2</td>
+<td align="right">0.2</td>
+<td align="right">0.1</td>
+<td align="right">0.1</td>
+</tr>
+
+<tr>
+<td align="right">35</td>
+<td align="right">1.1</td>
+<td align="right">10.6</td>
+<td align="right">21.3</td>
+<td align="right">0.2</td>
+<td align="right">0.2</td>
+<td align="right">4.1</td>
+<td align="right">0.8</td>
+<td align="right">0.4</td>
+<td align="right">0.3</td>
+</tr>
+
+<tr>
+<td align="right">129</td>
+<td align="right">3.4</td>
+<td align="right">19.7</td>
+<td align="right">61.4</td>
+<td align="right">0.6</td>
+<td align="right">0.7</td>
+<td align="right">13.5</td>
+<td align="right">2.9</td>
+<td align="right">1.5</td>
+<td align="right">1.2</td>
+</tr>
+
+<tr>
+<td align="right">464</td>
+<td align="right">9.5</td>
+<td align="right">26.9</td>
+<td align="right">154.6</td>
+<td align="right">2.1</td>
+<td align="right">2.5</td>
+<td align="right">34.8</td>
+<td align="right">10.3</td>
+<td align="right">4.5</td>
+<td align="right">4.1</td>
+</tr>
+
+<tr>
+<td align="right">1668</td>
+<td align="right">19.4</td>
+<td align="right">30.2</td>
+<td align="right">269.3</td>
+<td align="right">7.3</td>
+<td align="right">8.9</td>
+<td align="right">62.9</td>
+<td align="right">36.3</td>
+<td align="right">11.6</td>
+<td align="right">11.6</td>
+</tr>
+
+<tr>
+<td align="right">5994</td>
+<td align="right">28.0</td>
+<td align="right">31.5</td>
+<td align="right">337.7</td>
+<td align="right">25.7</td>
+<td align="right">31.9</td>
+<td align="right">83.4</td>
+<td align="right">122.1</td>
+<td align="right">21.9</td>
+<td align="right">26.5</td>
+</tr>
+
+<tr>
+<td align="right">21544</td>
+<td align="right">31.7</td>
+<td align="right">31.9</td>
+<td align="right">364.5</td>
+<td align="right">85.2</td>
+<td align="right">114.5</td>
+<td align="right">91.5</td>
+<td align="right">362.5</td>
+<td align="right">28.8</td>
+<td align="right">83.3</td>
+</tr>
+
+<tr>
+<td align="right">77426</td>
+<td align="right">32.8</td>
+<td align="right">32.0</td>
+<td align="right">350.2</td>
+<td align="right">246.8</td>
+<td align="right">409.4</td>
+<td align="right">119.4</td>
+<td align="right">855.8</td>
+<td align="right">31.6</td>
+<td align="right">211.0</td>
+</tr>
+
+<tr>
+<td align="right">278255</td>
+<td align="right">34.3</td>
+<td align="right">32.1</td>
+<td align="right">356.4</td>
+<td align="right">596.5</td>
+<td align="right">1389.0</td>
+<td align="right">122.6</td>
+<td align="right">1333.1</td>
+<td align="right">34.0</td>
+<td align="right">327.0</td>
+</tr>
+
+<tr>
+<td align="right">1000000</td>
+<td align="right">34.4</td>
+<td align="right">32.5</td>
+<td align="right">371.9</td>
+<td align="right">921.5</td>
+<td align="right">3521.7</td>
+<td align="right">126.7</td>
+<td align="right">2049.5</td>
+<td align="right">33.9</td>
+<td align="right">366.5</td>
+</tr>
+</tbody>
+</table>
+
+<p>Тестирование проводилось на CPU i7-6850K (Broadwell E, 6 cores, 12 threads)
+и GPU GTX1080Ti.</p>
+
+<p>Код, всех тестов доступен в GitHub: <a href="https://gist.github.com/Arturus/dd5397e5cba3e4c05745811371406d83" target="_blank">https://gist.github.com/Arturus/dd5397e5cba3e4c05745811371406d83</a></p>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/sampling/">sampling</a>
+  
+  <a class="badge badge-light" href="/tags/gpu/">GPU</a>
+  
+  <a class="badge badge-light" href="/tags/distribution/">distribution</a>
+  
+  <a class="badge badge-light" href="/tags/numpy/">numpy</a>
+  
+  <a class="badge badge-light" href="/tags/mkl/">MKL</a>
+  
+  <a class="badge badge-light" href="/tags/scipy/">scipy</a>
+  
+  <a class="badge badge-light" href="/tags/pytorch/">Pytorch</a>
+  
+  <a class="badge badge-light" href="/tags/tensorflow/">Tensorflow</a>
+  
+  <a class="badge badge-light" href="/tags/pymc3/">PyMC3</a>
+  
+</div>
+
+
+
+    
+
+
+
+
+
+
+<div class="media author-card" itemscope itemtype="http://schema.org/Person">
+  
+  <img class="portrait mr-3" src="/img/me_sq.jpg" itemprop="image" alt="Avatar">
+  
+  <div class="media-body">
+    <h5 class="card-title" itemprop="name"><a href="/">Артур Суилин</a></h5>
+    <h6 class="card-subtitle">Chief Data Scientist</h6>
+    
+    <ul class="network-icon" aria-hidden="true">
+      
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="//www.linkedin.com/in/suilin-arthur-304b8219/" target="_blank" rel="noopener">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="//github.com/Arturus" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="//www.kaggle.com/asuilin" target="_blank" rel="noopener">
+          <i class="fab fa-kaggle"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="//instagram.com/asuilin" target="_blank" rel="noopener">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+
+    
+    <div class="article-widget">
+      <div class="post-nav">
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="https://suilin.ru/post/conversion_numbers/" rel="next">Конверсия и data science I. Как увидеть невидимое.</a>
+  </div>
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="https://suilin.ru/post/pandas_column/" rel="prev">Как добавить колонку к pd.DataFrame</a>
+  </div>
+  
+</div>
+
+    </div>
+    
+
+    
+
+
+  </div>
+</article>
+
+<div class="container">
+  <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    &copy; 2018 &middot; Артур Суилин &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+</div>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+    
+    
+    <script src="/js/mathjax-config.500a6cbb2c0f345fcecc21b3116d6637aa78f1f11db8081ea581abe05390c2e8f3bbffe61be3cf0217baf785c40efceabe51050a4f007e69af94efd3643260e8.js" integrity="sha512-UApsuywPNF/OzCGzEW1mN6p48fEduAgepYGr4FOQwujzu//mG&#43;PPAhe694XEDvzqvlEFCk8AfmmvlO/TZDJg6A=="></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    <script src="/js/hugo-academic.js"></script>
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    <script>
+      
+      window.lazyLoadOptions = {elements_selector: ".lazy"};
+    </script>
+    <script async src="https://cdn.jsdelivr.net/npm/intersection-observer@0.5.1/intersection-observer.js"></script>
+    <script async src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@11.0.5/dist/lazyload.min.js"></script>
+
+  </body>
+</html>
+

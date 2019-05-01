@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Performance on Артур Суилин</title>
+    <link>https://suilin.ru/categories/performance/</link>
+    <description>Recent content in Performance on Артур Суилин</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ru</language>
+    <copyright>&amp;copy; 2018 &amp;middot; Артур Суилин</copyright>
+    <lastBuildDate>Mon, 10 Dec 2018 00:00:00 +0300</lastBuildDate>
+    
+	<atom:link href="https://suilin.ru/categories/performance/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Эффективное сэмплирование распределений на Python</title>
+      <link>https://suilin.ru/post/sampling_performance/</link>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0300</pubDate>
+      
+      <guid>https://suilin.ru/post/sampling_performance/</guid>
+      <description>th { text-align: right; }  В ходе работы над последним проектом мне понадобилось в промышленных масштабах генерировать сэмплы из бета-распределения. Первое что пришло в голову, это scipy.stat, тем более там есть куча дополнительных возможностей: и CDF, и квантили, и MLE, и всё, что душа пожелает. Но довольно быстро я понял, что scipy нетороплив, и генерация нескольких миллиардов сэмплов затянется на часы, а то и на дни. Стал искать альтернативные варианты и хочу теперь поделиться найденным.</description>
+    </item>
+    
+    <item>
+      <title>Как добавить колонку к pd.DataFrame</title>
+      <link>https://suilin.ru/post/pandas_column/</link>
+      <pubDate>Sat, 20 Oct 2018 00:00:00 +0300</pubDate>
+      
+      <guid>https://suilin.ru/post/pandas_column/</guid>
+      <description>Введение В Pandas существует по меньшей мере три официальных способа добавить колонку, не включая экзотических:
+Способ №1
+import pandas as pd df = pd.DataFrame(...) df[&#39;column&#39;] = value  У этого способа самый простой и очевидный синтаксис, поэтому по умолчанию обычно используют именно его. Но наверняка каждый, кто работал с Pandas, получал хотя бы раз в жизни такой неприятный warning при добавлении колонки:
+SettingWithCopyWarning: A value is trying to be set on a copy of a slice from a DataFrame.</description>
+    </item>
+    
+  </channel>
+</rss>

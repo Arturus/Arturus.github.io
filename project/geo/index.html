@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 3.0.0">
+  <meta name="generator" content="Hugo 0.53" />
+  <meta name="author" content="Артур Суилин">
+
+  
+  
+  
+  
+    
+  
+  <meta name="description" content="Решение проблемы определения места жительства владельца Instagram аккаунта с помощью моделей машинного обучения. Подготовка данных, архитектура моделей, методика обучения, результаты.">
+
+  
+  <link rel="alternate" hreflang="ru" href="https://suilin.ru/project/geo/">
+
+  
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#086377">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous">
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Fira+Sans+Condensed:400,400italic,700|PT+Mono|Fira+Sans|PT+Serif:400,400italic,700">
+  
+
+  <link rel="stylesheet" href="/styles.css">
+  
+  <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-38480657-1', 'auto');
+      
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="//www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
+  
+
+  
+  <link rel="alternate" href="https://suilin.ru/index.xml" type="application/rss+xml" title="Артур Суилин">
+  <link rel="feed" href="https://suilin.ru/index.xml" type="application/rss+xml" title="Артур Суилин">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="https://suilin.ru/project/geo/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@asuilin">
+  <meta property="twitter:creator" content="@asuilin">
+  
+  <meta property="og:site_name" content="Артур Суилин">
+  <meta property="og:url" content="https://suilin.ru/project/geo/">
+  <meta property="og:title" content="Определение места жительства Instagram пользователей | Артур Суилин">
+  <meta property="og:description" content="Решение проблемы определения места жительства владельца Instagram аккаунта с помощью моделей машинного обучения. Подготовка данных, архитектура моделей, методика обучения, результаты.">
+  
+  
+    
+  <meta property="og:image" content="https://suilin.ru/img/me_sq.jpg">
+  <meta property="og:locale" content="ru">
+  
+  <meta property="article:published_time" content="2018-06-27T00:00:00&#43;03:00">
+  
+  <meta property="article:modified_time" content="2018-06-27T00:00:00&#43;03:00">
+  
+
+  
+
+  <meta property="og:type" content="article"/>
+<meta name="yandex-verification" content="5753f991e1c3d96c" />
+<meta name="google-site-verification" content="5sd_7MZqiS3rR-1B3f-FqUkrWEd92TYr9FNEGkFE14I" />
+
+<script type="text/javascript" >
+  (function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+      try {
+        w.yaCounter21550249 = new Ya.Metrika2({
+          id:21550249,
+          clickmap:true,
+          trackLinks:true,
+          accurateTrackBounce:true,
+          webvisor:true
+        });
+      } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+      s = d.createElement("script"),
+      f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = "https://mc.yandex.ru/metrika/tag.js";
+
+    if (w.opera == "[object Opera]") {
+      d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+  })(document, window, "yandex_metrika_callbacks2");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/21550249" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+
+
+  <title>Определение места жительства Instagram пользователей | Артур Суилин</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Артур Суилин</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Переключить навигацию">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/">
+            
+            <span>Главная</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/post/">
+            
+            <span>Блог</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/project/">
+            
+            <span>Проекты</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#contact">
+            
+            <span>Контакты</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article article-project" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">Определение места жительства Instagram пользователей</h1>
+
+  
+  <p class="page-subtitle">Проект был выполнен для компании Deep.Social</p>
+  
+
+  
+    
+
+<div class="article-metadata">
+
+  
+  
+  <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Артур Суилин">
+  </span>
+  
+
+  <span class="article-date">
+    
+    <meta content="2018-06-27 00:00:00 &#43;0300 MSK" itemprop="datePublished">
+    <time datetime="2018-06-27 00:00:00 &#43;0300 MSK" itemprop="dateModified">
+      27.06.2018
+    </time>
+  </span>
+  <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Артур Суилин">
+  </span>
+
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+</div>
+
+  
+</div>
+
+
+
+  <div class="article-container">
+    
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+<p><img src="world_crop2.jpg">
+Для рекламодателей одним из самых важных параметров блогера и его
+аудитории является географическое положение (geolocation), соответствующее
+месту жительства.
+Чтобы рекламная кампания была эффективной, она обычно должна быть таргетирована
+ на конкретную страну или даже город.</p>
+
+<h2 id="геотэги">Геотэги</h2>
+
+<p>Посты в Instagram могут содержать информацию о месте, в котором был сделан пост, называемую <em>geotags</em>.
+ Это самый простой и очевидный способ определения geolocation. В заголовке страницы приведена карта,
+  окраска которой соответствует количеству постов, сделанных в каждой точке мира (построено
+  по данным геотэгов из более чем 4 млрд. постов).
+Видно, что наибольшая интенсивность
+    постов соответствует местам с большой плотностью населения &ndash; крупные города с пригородами,
+ зоны вдоль крупных трасс.</p>
+
+<p>Но геотэги, несмотря на свою очевидную полезность, не являются надёжным источником информации
+ о месте <strong>проживания</strong> владельца аккаунта:</p>
+
+<ul>
+<li>Часто люди используют geotagging только когда едут в командировку/отпуск/путешествие или находятся в интересных с их точки зрения местах.
+То есть у блогера, живущего в Лондоне, геотэги могут быть из каких угодно мест мира, кроме самого Лондона.</li>
+<li>Далеко не все аккаунты включают geotagging постов. У большинства постов (более 85%) геотэги не проставлены.</li>
+</ul>
+
+<p>Поэтому, если определять geolocation только по геотэгам, у результатов будет маленькое покрытие и низкая точность.
+ Чтобы улучшить качество определения, необходимо использовать дополнительную информацию.</p>
+
+<p><img src="sources.jpg" width="450"/></p>
+
+<h2 id="дополнительные-источники-информации">Дополнительные источники информации</h2>
+
+<p>Cуществует много дополнительных, не столь очевидных и надёжных, как геотэги, источников информации о местоположении блогера.</p>
+
+<ul>
+<li>В первую очередь это текст из раздела ‘bio’ аккаунта: в нем могут быть указаны город блогера или локальные географические названия,
+сайт или email в национальных доменах, emoji, соответствующие флагам стран, и т.п.</li>
+<li>Такая же информация + текстовые тэги может содержаться в тексте постов и комментариев.</li>
+<li>Кроме этого, можно использовать информацию о языке и audience geolocation &ndash; очевидно,
+что например японская аудитория скорее будет у блогера из Японии, чем у блогера из Мексики.
+Также маловероятно, что мексиканский блогер будет делать посты на японском языке.</li>
+<li>Также, приблизительную геоинформацию можно извлекать из фотографий в постах (когда нет геотэгов).</li>
+</ul>
+
+<p>Вся эта информация извлекается с помощью набора правил,
+использующих как и сложные закодированные вручную эвристики, так и
+ machine learning модели для named entity recognition.
+Рассказ о методиках извлечения может потянуть
+на отдельный проект, поэтому здесь я сфокусируюсь только
+ на использовании уже извлеченной геоинформации.</p>
+
+<h2 id="ensemble-learning">Ensemble learning</h2>
+
+<p>Итак, есть несколько источников геоинформации.
+Каждый отдельно взятый источник не очень точен и достоверен,
+но совместное их использование может дать намного более точный результат. Классический подход,
+используемый для работы с такими источниками, это <em>ensemble learning</em>.</p>
+
+<blockquote>
+<p>Ensemble learning is a machine learning paradigm where multiple learners
+are trained to solve the same problem. In contrast to ordinary machine
+learning approaches which try to learn <em>one</em> hypothesis from training data,
+ ensemble methods try to construct a set of hypotheses and combine them to use.<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup></p>
+</blockquote>
+
+<p>В нашем конкретном случае используется разновидность ensemble learning, называемая
+<em><a href="https://en.wikipedia.org/wiki/Ensemble_learning#Stacking" target="_blank">stacking</a></em>.
+<img src="stacking.png" width="400"/>
+Смысл этого метода в том, что есть два уровня моделей:</p>
+
+<ul>
+<li>First level &ndash; это модели, извлекающие геоинформацию из данных Instagram, о которых мы говорили
+в предыдущем разделе (<em>base classifiers</em>).</li>
+<li>Second level (<em>meta-classifier</em>) использует предсказания, сгенерированные моделями на первом уровне,
+для принятия окончательного решения.</li>
+</ul>
+
+<p><img src="hands.jpg" width=600/></p>
+
+<h2 id="weighted-majority-voting">Weighted majority voting</h2>
+
+<p>Простейший способ создания meta classifier &ndash; это использование <em>weighted majority voting</em>.
+ Есть $N$ базовых классификаторов, каждому из них присваивается вес $w_i$, соответствующий
+ вероятности правильной классификации $\hat{p}_i$ (в данном случае правильному определению страны блогера).
+ Вероятности рассчитываются по обучающей выборке.
+$$w_i=\log\left(\frac{\hat{p}_i}{1−\hat{p}_i}\right),\quad i=1,\dotsc,N$$</p>
+
+<p>Классификаторы, которые часто ошибаются, получают меньший вес, классификаторы, у которых высокая точность &ndash; больший вес.
+На этом &ldquo;обучение&rdquo; заканчивается.</p>
+
+<p>Использование: для интересующего нас аккаунта каждым из базовых классификаторов назначаются
+ метки классов (в нашем случае это предполагаемые страны), получаем набор меток
+ $l_1,\dotsc,l_N$ . Значения, которые могут принимать метки,
+  это множество всех стран размером $M$: $(c_1,\dotsc,c_M)$.
+ Подсчитывается рейтинг каждого класса суммированием весов всех отданных
+ за него голосов.</p>
+
+<p>$$R(k)=\sum_{l_i=c_k}w_i,\quad k=1,\dotsc,M$$</p>
+
+<p>Результирующий класс (страна) &ndash; тот, который набрал наибольший рейтинг,
+ т.е. тот за которого было отдано больше голосов с большим весом:
+$$k^*=\operatorname*{arg} \operatorname*{max}_{k=1}^M R(k)$$</p>
+
+<p>Первая модель для определения geolocation использовала именно этот способ,
+ как самый простой в реализации. Но у него есть недостатки:</p>
+
+<ul>
+<li>Предсказания base classifiers могут быть неверными, например из bio может быть извлечена страна Япония,
+из геотэгов &ndash; Бразилия и Германия, при этом блогер на самом деле живет в Англии.
+Поэтому meta classifier должен не просто предсказывать страну, но еще
+и выдавать вероятность правильного ответа. Если полученная вероятность
+ниже некоторого порога, надо считать, что для определения страны у нас недостаточно информации.
+Но majority voting не выдает значение вероятности,
+можно только примерно оценить верхнюю и нижнюю границы.</li>
+<li>Majority voting не умеет работать с дополнительной информацией, не являющейся
+меткой класса, например с языком аккаунта.</li>
+<li>Majority voting исходит из предположений, что предсказания base classifiers
+не коррелируют друг с другом, и что вероятность
+корректной классификации одинакова для любой страны. В реальной жизни
+ни то ни другое не выполняется: надо учитывать и возможные взаимодействия
+между классификаторами и индивидуальные особенности стран.</li>
+</ul>
+
+<p><img src="catboost.jpeg" width="400"></p>
+
+<h2 id="gradient-boosting">Gradient boosting</h2>
+
+<p>Учитывая все недостатки majority voting, была разработана более совершенная модель,
+ использующая <em><a href="https://en.wikipedia.org/wiki/Gradient_boosting" target="_blank">градиентный бустинг</a></em>.
+  В данном проекте использовалась
+ библиотека <a href="https://tech.yandex.ru/catboost/" target="_blank">Yandex CatBoost</a>.</p>
+
+<p>Градиентный бустинг это один из самых лучших известных на сегодняшний день алгоритмов машинного обучения
+для табличных данных. Поэтому качество полученной модели превзошло все ожидания.</p>
+
+<h3 id="формирование-обучающих-данных">Формирование обучающих данных</h3>
+
+<p>Чтобы обучить модель, надо сначала каким то образом получить разметку Instagram
+аккаунтов в виде истинного места проживания владельца. Получить эти данные напрямую
+от владельцев затруднительно, поэтому был использован косвенный источник: Twitter.</p>
+
+<p>Владелец Twitter аккаунта может указать свое место жительства (location), эта информация общедоступна.
+ Если у этого же человека есть Instagram account, то можно использовать геоинформацию из Twitter,
+ в качестве ground truth. Конечно геоданные из Twitter не являются абсолютно точными, т.к. люди не всегда
+ указывают настоящее место жительства, или переезжают и забывают обновить location.
+ По приблизительным оценкам, примерно у 1-3% Twitter аккаунтов информация
+о location является неверной или устаревшей. Но, как показала практика, это не помешало обучению.</p>
+
+<p><img src="location.jpg" width=600></p>
+
+<p>Место жительства из Твиттера представляет собой строку произвольного формата. Иногда там указана
+страна, иногда город, иногда штат, иногда просто афоризм или шутка, не имеющие отношения к географии.
+Для обучения необходимо преобразовать эти данные к коду страны.
+Задача получения географических координат из адреса произвольного формата называется
+ <em><a href="https://en.wikipedia.org/wiki/Geocoding" target="_blank">геокодирование</a></em>. В этом проекте для геокодирования была использована
+ система <a href="https://wiki.openstreetmap.org/wiki/Nominatim" target="_blank">Nominatim</a>, созданная сообществом Open Street Maps.</p>
+
+<p>Задача геокодирования часто не имеет однозначного решения. Например, строка Moscow может обозначать столицу России,
+ а может город в USA. Georgia может оказаться как страной Грузией, так и штатом в USA.</p>
+
+<p>Чтобы убрать неоднозначности и повысить точность, дополнительно использовался анализ поисковой выдачи Google.
+В выдаче по строке с адресом проверялось наличие сниппета &ldquo;географическое место&rdquo;, и если сниппет найден,
+в нём анализировалась ссылка на информацию в <a href="https://www.wikidata.org" target="_blank">WikiData</a>.
+Если страна из WikiData совпадала со страной, которую
+выдал Nominatim, результат геокодирования принимался, в противном случае назначалась дополнительная ручная
+проверка. Идея здесь в том, что Google, на основе собственного анализа популярности поисковых запросов,
+знает, какой город люди обычно имеют в виду, когда пишут &ldquo;Moscow&rdquo;. Как показали результаты, такая перепроверка
+оказалась полезной, и значительно повысила точность геокодирования по сравнению с использованием чистого Nominatim.</p>
+
+<h3 id="модель">Модель</h3>
+
+<p>Самый очевидный способ моделирования это multiclass classification, где каждый класс
+соответствует отдельной стране. Но такая модель не очень хорошо работает на практике.
+Проблема в том, что распределение стран по количеству аккаунтов в них
+очень неравномерное. Есть несколько доминирующих стран, в которых находится
+основное количество аккаунтов, и длинный хвост из стран небольшого размера,
+или в которых Instagram непопулярен. В результате для стран из &ldquo;хвоста&rdquo;
+качество определения страны будет посредственным. Модели просто не хватит
+данных для обучения в этих странах.</p>
+
+
+
+
+<figure>
+
+<img src="acc_country.jpg" alt="Зависимость точности (ось Y) от кол-ва аккаунтов страны в обучающей выборке (ось X, логарифмическая шкала), для одной из ранних моделей." width="400" />
+
+
+
+<figcaption data-pre="Рис. " data-post=":" class="numbered">
+  
+  <p>
+    Зависимость точности (ось Y) от кол-ва аккаунтов страны в обучающей выборке (ось X, логарифмическая шкала), для одной из ранних моделей.
+    
+    
+    
+  </p> 
+</figcaption>
+
+</figure>
+
+<p>На рис. 1 видно, что с уменьшением количества аккаунтов на страну точность понижается.
+Чтобы избежать этого эффекта, был выбран другой способ моделирования классов,
+близкий по смыслу к majority voting, где модель вообще не отличает страны друг от друга,
+а принимает во внимание только &ldquo;силу&rdquo; голосов за каждую страну.</p>
+
+<p>В данных каждого аккаунта базовые классификаторы обычно распознают не более
+3-4 разных стран. Из этих стран и надо выбрать правильный ответ (или отсутствие ответа).
+Поэтому для работы модели достаточно всего 4-x классов, каждый из которых
+соответствует одной уникальной стране во входных данных, плюс один негативный класс
+&ldquo;Другое&rdquo;, чтобы модель могла просигнализировать, что ни одна страна из предложенных не подходит.
+Страны ранжируются в порядке популярности, т.е. самая часто встречающаяся
+страна из предложенных принимается за класс №1, вторая по популярности за класс №2 и т.п.
+В то же время, чтобы учесть индивидуальные особенности отдельных стран,
+идентификаторы предложенных стран (country codes) тоже подаются на вход модели.</p>
+
+<p>Таким образом модель совмещает в себе лучшее и от majority voting (способность
+обучаться на любых странах, даже если эта страна встретилась в обучающей выборке всего единожды)
+и от multiclass c классами-странами (способность учитывать особенности
+отдельной страны). Эксперименты показали, что точность такой модели для
+мелких стран заметно выросла, без ухудшения точности для крупных.</p>
+
+<h3 id="корректировка-весов-обучающих-примеров">Корректировка весов обучающих примеров</h3>
+
+
+
+
+<figure>
+
+<img src="country_diff.png" alt="Распределение долей top 18 стран в Twitter (по данным из обучающей выборки) и Instagram (по данным из геотэгов)" width="600" />
+
+
+
+<figcaption data-pre="Рис. " data-post=":" class="numbered">
+  
+  <p>
+    Распределение долей top 18 стран в Twitter (по данным из обучающей выборки) и Instagram (по данным из геотэгов)
+    
+    
+    
+  </p> 
+</figcaption>
+
+</figure>
+
+<p>Распределение стран в Twitter значительно отличается от распределения
+стран в Instagram, это видно на рис. 2. Например, популярность Instagram
+в России и в Иране значительно превосходит популярность Twitter. Если
+использовать обучающие данные as is, модель запомнит распределение стран
+из Twitter и будет подгонять свои ответы под это распределение. Вероятность
+того, модель выдаст в ответе Иран, будет так же мала, как доля Ирана в Twitter.</p>
+
+<p>Чтобы избежать этого, при обучении
+дополнительно задавались веса для каждого обучающего примера, равные
+соотношению долей соответствующей примеру страны в Instagram и Twitter.</p>
+
+<h3 id="результаты-обучения">Результаты обучения</h3>
+
+<p>Была получена точность определения страны <strong>97%</strong> при покрытии <strong>86%</strong> (т.е. для 14% аккаунтов имеющейся информации
+оказалось недостаточно для надежного принятия решения и выданная вероятность была ниже заданного порога).
+Если вообще не использовать пороговую вероятность, и учитывать предсказания для любых аккаунтов,
+   где есть хотя бы какая нибудь геоинформация, получится точность 93.4%.
+ Цифры точности измерялись на тестовой выборке, т.е. на аккаунтах, которые модель ни разу не видела в процессе
+ обучения и настройки гиперпараметров.</p>
+
+
+
+
+<figure>
+
+<img src="acc_cover.png" alt="Взаимозависимость между точностью и покрытием при разных значениях порога вероятности." width="500" />
+
+
+
+<figcaption data-pre="Рис. " data-post=":" class="numbered">
+  
+  <p>
+    Взаимозависимость между точностью и покрытием при разных значениях порога вероятности.
+    
+    
+    
+  </p> 
+</figcaption>
+
+</figure>
+
+
+
+
+<figure>
+
+<img src="features_unnorm.png" alt="Важность входных features для модели." width="500" />
+
+
+
+<figcaption data-pre="Рис. " data-post=":" class="numbered">
+  
+  <p>
+    Важность входных features для модели.
+    
+    
+    
+  </p> 
+</figcaption>
+
+</figure>
+
+<p>Как видно из рис. 4, наиболее важны country_id (идентификатор страны, позволяет модели
+ учитывать индивидуальные особенности отдельных стран), геотэги из постов, язык блогера
+и геоданные аудитории. Но эта диаграмма не совсем корректно отражает реальную важность,
+потому что далеко не все features присутствуют в каждом аккаунте.</p>
+
+
+
+
+<figure>
+
+<img src="features_norm.png" alt="Важность входных features для модели. Features нормализованы по частоте." width="500" />
+
+
+
+<figcaption data-pre="Рис. " data-post=":" class="numbered">
+  
+  <p>
+    Важность входных features для модели. Features нормализованы по частоте.
+    
+    
+    
+  </p> 
+</figcaption>
+
+</figure>
+
+<p>Если нормализовать важность features по частоте их появления в аккаунтах,
+то будут лидировать features c самой точной геоинформацией:
+телефонные номера (код страны), geotags, emoji (флаги стран).</p>
+
+<p>Можно заглянуть еще глубже, и проанализировать модель с использованием <a href="https://github.com/slundberg/shap" target="_blank">SHAP framework</a><sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup>.
+
+
+
+<figure>
+
+<img src="shap_all.png" alt="Feature importancе c использованием SHAP." width="400" />
+
+
+
+<figcaption data-pre="Рис. " data-post=":" class="numbered">
+  
+  <p>
+    Feature importancе c использованием SHAP.
+    
+    
+    
+  </p> 
+</figcaption>
+
+</figure></p>
+
+<p>Чем дальше точки на рис. 6 отклонены от середины, тем больше влияет
+на результат данная фича. Голубые точки это нулевые значения, обычно
+соответствующие отсутствию feature во входных данных, красные &ndash; ненулевые,
+т.е. в данном контексте непустые.</p>
+
+
+
+
+<figure>
+
+<img src="features_detail.png" alt="Детализация Feature importancе (SHAP) для отдельных аккаунтов." width="700" />
+
+
+
+<figcaption data-pre="Рис. " data-post=":" class="numbered">
+  
+  <p>
+    Детализация Feature importancе (SHAP) для отдельных аккаунтов.
+    
+    
+    
+  </p> 
+</figcaption>
+
+</figure>
+
+<p>На рис. 7 также видно, что наиболее “активными” features являются country_id, геотэги из постов, язык и emoji.</p>
+
+<h2 id="образец-работы-модели">Образец работы модели</h2>
+
+<p>Чтобы можно было посмотреть на реальные результаты работы модели, сформирована
+демо-выборка из 2000 аккаунтов (по тестовым данным, которые модель не
+ видела в процессе обучения). Выборка представляет собой CSV файл, состоящий из 5 колонок:</p>
+
+<ul>
+<li><strong>instagram</strong> &ndash; Instagram аккаунт, для которого определялась страна</li>
+<li><strong>twitter</strong> &ndash; соответствующий Twitter account, источник &ldquo;правды&rdquo;</li>
+<li><strong>prediction</strong> &ndash; предсказанная страна</li>
+<li><strong>truth</strong> &ndash; страна из Twitter</li>
+<li><strong>probability</strong> &ndash; вероятность, интерпретируемая как уверенность в предсказании</li>
+</ul>
+
+<p>Файл можно загрузить <a href="geo_sample.csv.gz" target="_blank">здесь</a>.</p>
+
+<p>В выборку включены результаты, где вероятность &gt; 90%. Как видно по приведенным данным,
+качество связки Instagram &lt;&ndash;&gt; Twitter не идеальное, попадаются ошибки,
+которые ухудшают замеренную результирующую точность. Поэтому реальная
+точность модели возможно еще выше, чем замеренные 97%</p>
+
+<h2 id="визуализации-геоданных">Визуализации геоданных</h2>
+
+<p>В завершение &ndash; пара дополнительных визуализаций географических данных Instagram,
+полученных с помощью описанной выше модели.</p>
+
+<h3 id="визуализация-1">Визуализация 1</h3>
+
+<p>Подсчитаем распределение количества аккаунтов Instagram по странам мира.
+Абсолютное количество, конечно, невозможно подсчитать, потому что для этого нужны были бы данные по всем аккаунтам,
+ существующим в Instagram. Вместо этого можно взять достаточно большой сэмпл и посчитать,
+  какой процент от всех аккаунтов принадлежит каждой стране.</p>
+
+
+
+
+<figure>
+
+<img src="map_percent.png" alt="Тройка лидеров по количеству аккаунтов это _USA, Brazil, Indonesia_. Меньше всего аккаунтов в странах _Африки_, _North Korea_, и _Greenland_." width="800" />
+
+
+
+<figcaption data-pre="Рис. " data-post=":" >
+  
+  <p>
+    Тройка лидеров по количеству аккаунтов это <em>USA, Brazil, Indonesia</em>. Меньше всего аккаунтов в странах <em>Африки</em>, <em>North Korea</em>, и <em>Greenland</em>.
+    
+    
+    
+  </p> 
+</figcaption>
+
+</figure>
+
+<h3 id="визуализация-2">Визуализация 2</h3>
+
+<p>Предыдущая визуализация интересна, но очевидно, что чем больше население страны,
+тем больше в ней будет Instagram accounts. Чтобы убрать зависимость от населенности,
+можно подсчитать, какой процент от общего количества Instagram аккаунтов
+ приходится <em>на одного жителя</em> страны. Таким образом мы получим популярность Instagram среди населения.
+<img src="map_normed.png" width=800/></p>
+
+<p>Видна совершенно другая картина.
+Пятерка стран, где жители больше всего любят Instagram: <em>Cyprus, United Arab Emirates,
+ Iceland, Qatar, Malaysia</em>. Эти страны окрашены светло-желтым, поэтому их не очень хорошо заметно на карте.
+ Среди крупных стран Instagram более всего популярен в <em>Brazil, Australia, USA</em>.
+Менее всего Instagram популярен в Африке и Азии.</p>
+
+<h2 id="заключение">Заключение</h2>
+
+<p>Проект передан в production, и успешно использовался
+в компании Deep.Social, радикально улучшив качество определения места жительства
+блогеров и их аудиторий, и убрав больше количество претензий клиентов к неточным данным.
+В настоящий момент проект также используется в компаниях, купивших у Deep.Social права на
+её продукт.</p>
+
+<h4 id="возможные-улучшения">Возможные улучшения:</h4>
+
+<ol>
+<li>Сейчас учитываемые геотэги просто суммируются, порядок их следования никак не учитывается
+(bag of geotags). В то же время, в геотэгах часто прослеживается явная темпоральная структура, соответствующая
+географическим перемещениям владельца аккаунта. Если учитывать эту структуру,
+то есть работать с геотэгами, как с временным рядом, возможно будет
+повысить точность. Например модель сможет различать ситуации, когда
+владелец аккаунта поехал в командировку и когда он переехал на новое место жительства.</li>
+<li>Информация из фотографий сейчас не используется, т.к. обучение computer vision
+классификатора занимает много времени, и проект не уложился бы в плановые сроки.
+Если начать использовать эту информацию, будет дополнительный источник
+данных, особенно актуальный для аккаунтов, которые не используют геотэги и не указывают
+дополнительной информации в bio. Вырастет покрытие.</li>
+</ol>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1"><a href="https://cs.nju.edu.cn/zhouzh/zhouzh.files/publication/springerEBR09.pdf" target="_blank">Zhi-Hua Zhou, Ensemble Learning</a>.
+ <a class="footnote-return" href="#fnref:1"><sup>^</sup></a></li>
+<li id="fn:2">Scott Lundberg, Su-In Lee (2017). A Unified Approach to Interpreting Model Predictions. <a href="https://arxiv.org/abs/1705.07874" target="_blank">arXiv:1705.07874</a> [cs.AI]
+ <a class="footnote-return" href="#fnref:2"><sup>^</sup></a></li>
+</ol>
+</div>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/instagram/">Instagram</a>
+  
+  <a class="badge badge-light" href="/tags/deep.social/">Deep.Social</a>
+  
+</div>
+
+
+
+    
+
+
+
+
+
+
+<div class="media author-card" itemscope itemtype="http://schema.org/Person">
+  
+  <img class="portrait mr-3" src="/img/me_sq.jpg" itemprop="image" alt="Avatar">
+  
+  <div class="media-body">
+    <h5 class="card-title" itemprop="name"><a href="/">Артур Суилин</a></h5>
+    <h6 class="card-subtitle">Chief Data Scientist</h6>
+    
+    <ul class="network-icon" aria-hidden="true">
+      
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="//www.linkedin.com/in/suilin-arthur-304b8219/" target="_blank" rel="noopener">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="//github.com/Arturus" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="//www.kaggle.com/asuilin" target="_blank" rel="noopener">
+          <i class="fab fa-kaggle"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="//instagram.com/asuilin" target="_blank" rel="noopener">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+  </div>
+</article>
+
+
+<div class="article-container article-widget">
+  <div class="post-nav">
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="https://suilin.ru/project/topic_tensor/" rel="next">TopicTensor: тематики в Instagram</a>
+  </div>
+  
+  
+</div>
+
+</div>
+
+
+<div class="container">
+  <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    &copy; 2018 &middot; Артур Суилин &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+</div>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+    
+    
+    <script src="/js/mathjax-config.500a6cbb2c0f345fcecc21b3116d6637aa78f1f11db8081ea581abe05390c2e8f3bbffe61be3cf0217baf785c40efceabe51050a4f007e69af94efd3643260e8.js" integrity="sha512-UApsuywPNF/OzCGzEW1mN6p48fEduAgepYGr4FOQwujzu//mG&#43;PPAhe694XEDvzqvlEFCk8AfmmvlO/TZDJg6A=="></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    <script src="/js/hugo-academic.js"></script>
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    <script>
+      
+      window.lazyLoadOptions = {elements_selector: ".lazy"};
+    </script>
+    <script async src="https://cdn.jsdelivr.net/npm/intersection-observer@0.5.1/intersection-observer.js"></script>
+    <script async src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@11.0.5/dist/lazyload.min.js"></script>
+
+  </body>
+</html>
+

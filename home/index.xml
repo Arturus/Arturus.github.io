@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Homes on Артур Суилин</title>
+    <link>https://suilin.ru/home/</link>
+    <description>Recent content in Homes on Артур Суилин</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ru</language>
+    <copyright>&amp;copy; 2018 &amp;middot; Артур Суилин</copyright>
+    
+	<atom:link href="https://suilin.ru/home/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title></title>
+      <link>https://suilin.ru/home/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://suilin.ru/home/about/</guid>
+      <description>Привет! Меня зовут Артур, я data scientist и machine learning engineer c бэкгранудом в области разработки и интернет-аналитики, а также с опытом создания команд и управления ими.
+Я увлёкся компьютерами и программированием еще в школьные годы (ранние 90-е). До сих пор помню, как программировать процессор Z80, если вы понимаете, о чём я.
+Я участвовал в самых разнообразных проектах, от решения нетривиальных data science задач, от построения аналитических сервисов, обрабатывающих петабайты данных и обслуживающих миллионы пользователей по всему миру.</description>
+    </item>
+    
+    <item>
+      <title>Опыт работы</title>
+      <link>https://suilin.ru/home/experience/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://suilin.ru/home/experience/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Мои контакты</title>
+      <link>https://suilin.ru/home/contact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://suilin.ru/home/contact/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

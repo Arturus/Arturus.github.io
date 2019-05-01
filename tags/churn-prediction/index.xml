@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Churn prediction on Артур Суилин</title>
+    <link>https://suilin.ru/tags/churn-prediction/</link>
+    <description>Recent content in Churn prediction on Артур Суилин</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ru</language>
+    <copyright>&amp;copy; 2018 &amp;middot; Артур Суилин</copyright>
+    <lastBuildDate>Mon, 15 Apr 2019 00:00:00 +0300</lastBuildDate>
+    
+	<atom:link href="https://suilin.ru/tags/churn-prediction/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Конверсия и data science VI. Клиент скорее жив, чем мёртв?</title>
+      <link>https://suilin.ru/post/user_churn/</link>
+      <pubDate>Mon, 15 Apr 2019 00:00:00 +0300</pubDate>
+      
+      <guid>https://suilin.ru/post/user_churn/</guid>
+      <description>Некоторые сайты, например новостные, не имеют явных целевых действий, таких как заказ или подписка. Для них важно не выполнение посетителем каких либо действий, а само присутствие посетителя на сайте, желательно регулярное. Но и для e-commerce сайтов тоже очень важны возвраты посетителей, так как вернувшийся посетитель обходится намного дешевле, чем новый. Каждый возврат это шанс что нибудь продать, при этом чем меньше интервал между возвратами, тем больше шансов на осуществление продажи.</description>
+    </item>
+    
+  </channel>
+</rss>

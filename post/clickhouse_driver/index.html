@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 3.0.0">
+  <meta name="generator" content="Hugo 0.53" />
+  <meta name="author" content="Артур Суилин">
+
+  
+  
+  
+  
+    
+  
+  <meta name="description" content="ClickHouse &ndash; самая быстрая в мире аналитическая СУБД. Для тех, кто с ним ещё не знаком, очень рекомендую попробовать, пересаживаться обратно на MySQL или Postgress потом не захочется.
+Обычно данные хранятся в ClickHouse в сыром, неагрегированном виде, и агрегируются на лету при выполнении SQL запросов. Но при решении data science задач часто возникает необходимость выгрузки именно сырых данных, для дальнейшей их обработки в памяти (например, для обучения модели по этим данным).">
+
+  
+  <link rel="alternate" hreflang="ru" href="https://suilin.ru/post/clickhouse_driver/">
+
+  
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#086377">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous">
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Fira+Sans+Condensed:400,400italic,700|PT+Mono|Fira+Sans|PT+Serif:400,400italic,700">
+  
+
+  <link rel="stylesheet" href="/styles.css">
+  
+  <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-38480657-1', 'auto');
+      
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="//www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
+  
+
+  
+  <link rel="alternate" href="https://suilin.ru/index.xml" type="application/rss+xml" title="Артур Суилин">
+  <link rel="feed" href="https://suilin.ru/index.xml" type="application/rss+xml" title="Артур Суилин">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="https://suilin.ru/post/clickhouse_driver/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@asuilin">
+  <meta property="twitter:creator" content="@asuilin">
+  
+  <meta property="og:site_name" content="Артур Суилин">
+  <meta property="og:url" content="https://suilin.ru/post/clickhouse_driver/">
+  <meta property="og:title" content="Ускоряем драйвер ClickHouse | Артур Суилин">
+  <meta property="og:description" content="ClickHouse &ndash; самая быстрая в мире аналитическая СУБД. Для тех, кто с ним ещё не знаком, очень рекомендую попробовать, пересаживаться обратно на MySQL или Postgress потом не захочется.
+Обычно данные хранятся в ClickHouse в сыром, неагрегированном виде, и агрегируются на лету при выполнении SQL запросов. Но при решении data science задач часто возникает необходимость выгрузки именно сырых данных, для дальнейшей их обработки в памяти (например, для обучения модели по этим данным).">
+  
+  
+    
+  <meta property="og:image" content="https://suilin.ru/img/me_sq.jpg">
+  <meta property="og:locale" content="ru">
+  
+  <meta property="article:published_time" content="2019-04-30T00:00:00&#43;03:00">
+  
+  <meta property="article:modified_time" content="2019-04-30T00:00:00&#43;03:00">
+  
+
+  
+
+  <meta property="og:type" content="article"/>
+<meta name="yandex-verification" content="5753f991e1c3d96c" />
+<meta name="google-site-verification" content="5sd_7MZqiS3rR-1B3f-FqUkrWEd92TYr9FNEGkFE14I" />
+
+<script type="text/javascript" >
+  (function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+      try {
+        w.yaCounter21550249 = new Ya.Metrika2({
+          id:21550249,
+          clickmap:true,
+          trackLinks:true,
+          accurateTrackBounce:true,
+          webvisor:true
+        });
+      } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+      s = d.createElement("script"),
+      f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = "https://mc.yandex.ru/metrika/tag.js";
+
+    if (w.opera == "[object Opera]") {
+      d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+  })(document, window, "yandex_metrika_callbacks2");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/21550249" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+
+
+  <title>Ускоряем драйвер ClickHouse | Артур Суилин</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Артур Суилин</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Переключить навигацию">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/">
+            
+            <span>Главная</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/post/">
+            
+            <span>Блог</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/project/">
+            
+            <span>Проекты</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#contact">
+            
+            <span>Контакты</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">Ускоряем драйвер ClickHouse</h1>
+
+  
+
+  
+    
+
+<div class="article-metadata">
+
+  
+  
+  <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Артур Суилин">
+  </span>
+  
+
+  <span class="article-date">
+    
+    <meta content="2019-04-30 00:00:00 &#43;0300 MSK" itemprop="datePublished">
+    <time datetime="2019-04-30 00:00:00 &#43;0300 MSK" itemprop="dateModified">
+      30.04.2019
+    </time>
+  </span>
+  <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Артур Суилин">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    4 min read
+  </span>
+  
+
+  
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder"></i>
+    
+    <a href="/categories/programming/">Programming</a>
+    
+  </span>
+  
+  
+
+  
+  
+
+  
+
+</div>
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+<p><a href="https://clickhouse.yandex" target="_blank">ClickHouse</a> &ndash; самая быстрая в мире аналитическая СУБД. Для тех, кто с ним ещё не знаком,
+очень рекомендую попробовать, пересаживаться обратно на MySQL или Postgress потом не захочется.</p>
+
+<p>Обычно данные хранятся в ClickHouse в сыром, неагрегированном виде, и агрегируются
+на лету при выполнении SQL запросов. Но при решении data science задач часто возникает необходимость
+выгрузки именно сырых данных, для дальнейшей их обработки в памяти (например, для
+обучения модели по этим данным). Если выгружать данные в текстовый файл
+с помощью родного клиента ClickHouse, всё происходит достаточно шустро &ndash;
+&ldquo;ClickHouse не тормозит&rdquo;™.
+Но если пользоваться <a href="https://github.com/mymarilyn/clickhouse-driver" target="_blank">драйвером для Python</a>, то процесс выгрузки затягивается
+надолго. Почему?</p>
+
+<p>Дело не в том, что драйвер плохо написан &ndash; драйвер как раз отличный. Проблема
+лежит глубже. ClickHouse отдаёт данные в виде бинарного потока, каждый
+элемент которого соответствует машинному представлению числа на x86 процессоре.
+Если работать с этими данными на низкоуровневом языке, таком как С++ (как
+в родном клиенте), проблем с быстродействием не будет. Если колонка, например,
+имеет тип <code>Int32</code>, то на клиента приедет фактически готовый к использованию
+массив чисел с типом <code>int32_t</code>.</p>
+
+<p>Но Python представляет все числа, как объекты. Это означает, что драйвер
+проходит по загруженным данным, преобразует каждое число в объект,
+и потом уже из этих объектов собирает питоновский массив (состоящий из указателей). Такая операция
+называется <em>boxing</em>, и при больших объемах данных она отнимает значительное время.
+Собственно, в ходе загрузки данных через Python-драйвер основное занятие CPU это переупаковка
+чисел из машинного представления в объекты.</p>
+
+<p>В то же время в data science
+принято работать c <a href="https://www.numpy.org/" target="_blank">numpy</a> массивами (pandas тоже работает через numpy), которые содержат числа
+в машинном представлении, как в С. То есть, сначала мы долго упаковывали числа в объекты, а потом,
+при конвертировании из Python массива в numpy массив будем распаковывать объекты обратно в числа (<em>unboxing</em>).
+Очевидно, что промежуточное объектное представление здесь только мешает,
+и если бы драйвер умел выгружать данные сразу в numpy массивы, процесс
+пошёл бы намного бодрее. Но драйвер этого не умеет, поэтому я его немного доработал,
+чтобы такая возможность появилась.</p>
+
+<h2 id="инсталляция">Инсталляция</h2>
+
+<ol>
+<li>Если уже установлен пакет <em>clickhouse-driver</em>, удалить его: <code>pip uninstall clickhouse-driver</code></li>
+<li>Инсталлировать из github версию с ускоренным чтением:
+<code>pip install git+https://github.com/Arturus/clickhouse-driver.git</code></li>
+</ol>
+
+<h2 id="использование">Использование</h2>
+
+<p>При создании объекта <code>Client</code> надо включить новую опцию <code>numpy_columns=True</code>,
+а при выполнении запросов включать опцию <code>columnar=True</code>:</p>
+
+<pre><code class="language-python">client = Client('localhost', database='db', settings=dict(numpy_columns=True))
+data = client.execute(query, columnar=True)
+</code></pre>
+
+<p>В <em>data</em> будет содержаться набор колонок. Колонки, представляющие собой
+числа или timestamp, будут numpy-массивами, остальные колонки (например, строки) будут стандартными
+Python массивами. В numpy формат конвертируются следующие типы Clickhouse:
+Int8/16/32/64, UInt8/16/32/64, DateTime.</p>
+
+<p>Полученные данные часто преобразуются в pandas DataFrame с именами колонок,
+соответствующими именам колонок в БД. Чтобы не делать это каждый раз вручную,
+в класс Client добавлен метод <code>query_dataframe()</code>:</p>
+
+<pre><code class="language-python">df = client.query_dataframe('SELECT a,b FROM table')
+</code></pre>
+
+<p>Результатом будет DataFrame с двумя колонками, <strong>a</strong> и <strong>b</strong>.
+<style>th {text-align: center;}</style></p>
+
+<h2 id="benchmarks">Benchmarks</h2>
+
+<p>Замерялась скорость выполнения запроса <code>SELECT x1,x2,...,xn FROM table</code> на таблице со
+100 млн. записей (реальные данные из Logs API Яндекс.Метрики), engine=MergeTree. Запросы выполнялись на локальном
+ClickHouse c дефолтными настройками драйвера.</p>
+
+<table>
+<thead>
+<tr>
+<th>Запрос</th>
+<th align="center">Время, numpy</th>
+<th align="center">Время, standard</th>
+<th align="center">Ускорение</th>
+<th align="center">Memory, numpy</th>
+<th align="center">Memory, standard</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>4 колонки Int8</td>
+<td align="center">0.34 s</td>
+<td align="center">5.8 s</td>
+<td align="center">×<strong>17</strong></td>
+<td align="center">0.82 Gb</td>
+<td align="center">3.3 Gb</td>
+</tr>
+
+<tr>
+<td>2 колонки Int64</td>
+<td align="center">1.38 s</td>
+<td align="center">12 s</td>
+<td align="center">×<strong>8.7</strong></td>
+<td align="center">2.61 Gb</td>
+<td align="center">9.7 Gb</td>
+</tr>
+
+<tr>
+<td>1 колонка DateTime</td>
+<td align="center">12.1 s</td>
+<td align="center">7.1 m</td>
+<td align="center">×<strong>35</strong></td>
+<td align="center">1.16 Gb</td>
+<td align="center">4.8 Gb</td>
+</tr>
+</tbody>
+</table>
+
+<p>Использование numpy ускоряет чтение на порядок. Особенно заметно ускорение на
+типе DateTime, потому что работа c временем на уровне Питоновских datetime-объектов
+происходит очень медленно. Фактически, без использования numpy время выполнения
+запроса, включающего колонку со временем, выходит за рамки разумного.</p>
+
+<p>В последних двух колонках &ndash; объём памяти, занимаемый процессом после
+выполнения запроса. Видно, что использование numpy не только ускоряет
+загрузку данных, но и уменьшает объём требуемой памяти примерно в 4 раза.</p>
+
+<h2 id="ограничения">Ограничения</h2>
+
+<ul>
+<li>Поддерживается только чтение в numpy массивы. Запись возможна только в режиме <code>numpy_columns=False</code>.</li>
+<li>numpy массивы не используются при чтении nullable колонок и колонок-массивов. Впрочем, код чтения массивов тоже немного оптимизирован и теперь работает быстрее, чем в обычном драйвере.</li>
+<li>Также numpy не используется при чтении enums, decimal и
+прочих продвинутых типов (поддержка может быть добавлена в будущем).</li>
+</ul>
+
+<p>Ограничения на чтение никак не мешают функционированию драйвера, просто
+ для некоторых типов данных чтение ускоряется, а для некоторых &ndash; работает, как обычно.</p>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/clickhouse/">ClickHouse</a>
+  
+  <a class="badge badge-light" href="/tags/python/">Python</a>
+  
+  <a class="badge badge-light" href="/tags/performance/">Performance</a>
+  
+</div>
+
+
+
+    
+
+
+
+
+
+
+<div class="media author-card" itemscope itemtype="http://schema.org/Person">
+  
+  <img class="portrait mr-3" src="/img/me_sq.jpg" itemprop="image" alt="Avatar">
+  
+  <div class="media-body">
+    <h5 class="card-title" itemprop="name"><a href="/">Артур Суилин</a></h5>
+    <h6 class="card-subtitle">Chief Data Scientist</h6>
+    
+    <ul class="network-icon" aria-hidden="true">
+      
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="//www.linkedin.com/in/suilin-arthur-304b8219/" target="_blank" rel="noopener">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="//github.com/Arturus" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="//www.kaggle.com/asuilin" target="_blank" rel="noopener">
+          <i class="fab fa-kaggle"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="//instagram.com/asuilin" target="_blank" rel="noopener">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+    <div class="article-widget">
+      <div class="hr-light"></div>
+      <h3>Related</h3>
+      <ul>
+        
+        <li><a href="/post/pandas_column/">Как добавить колонку к pd.DataFrame</a></li>
+        
+      </ul>
+    </div>
+    
+
+    
+    <div class="article-widget">
+      <div class="post-nav">
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="https://suilin.ru/post/user_churn/" rel="prev">Конверсия и data science VI. Клиент скорее жив, чем мёртв?</a>
+  </div>
+  
+</div>
+
+    </div>
+    
+
+    
+
+
+  </div>
+</article>
+
+<div class="container">
+  <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    &copy; 2018 &middot; Артур Суилин &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+</div>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+    
+    
+    <script src="/js/mathjax-config.500a6cbb2c0f345fcecc21b3116d6637aa78f1f11db8081ea581abe05390c2e8f3bbffe61be3cf0217baf785c40efceabe51050a4f007e69af94efd3643260e8.js" integrity="sha512-UApsuywPNF/OzCGzEW1mN6p48fEduAgepYGr4FOQwujzu//mG&#43;PPAhe694XEDvzqvlEFCk8AfmmvlO/TZDJg6A=="></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    <script src="/js/hugo-academic.js"></script>
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    <script>
+      
+      window.lazyLoadOptions = {elements_selector: ".lazy"};
+    </script>
+    <script async src="https://cdn.jsdelivr.net/npm/intersection-observer@0.5.1/intersection-observer.js"></script>
+    <script async src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@11.0.5/dist/lazyload.min.js"></script>
+
+  </body>
+</html>
+

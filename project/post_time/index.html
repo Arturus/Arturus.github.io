@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 3.0.0">
+  <meta name="generator" content="Hugo 0.53" />
+  <meta name="author" content="Артур Суилин">
+
+  
+  
+  
+  
+    
+  
+  <meta name="description" content="Аудиторию блогера в Инстаграм можно разделить на активную (те, кто лайкают посты) и пассивную (те, кто подписан, но не ставит лайки). Для рекламодателей активная аудитория особенно интересна, поэтому её свойства (соцдем, интересы и т.п.) лучше определять отдельно. Чтобы выделить активную аудиторию, очевидно, необходимо получить лайки к постам. Проблема в том, что у крупных блогеров могут быть миллионы лайков, а Инстаграм за один запрос отдаёт весьма ограниченное количество последних лайков, поэтому получение всех лайков от постов всех блогеров технически затруднительно.">
+
+  
+  <link rel="alternate" hreflang="ru" href="https://suilin.ru/project/post_time/">
+
+  
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#086377">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous">
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Fira+Sans+Condensed:400,400italic,700|PT+Mono|Fira+Sans|PT+Serif:400,400italic,700">
+  
+
+  <link rel="stylesheet" href="/styles.css">
+  
+  <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-38480657-1', 'auto');
+      
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="//www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
+  
+
+  
+  <link rel="alternate" href="https://suilin.ru/index.xml" type="application/rss+xml" title="Артур Суилин">
+  <link rel="feed" href="https://suilin.ru/index.xml" type="application/rss+xml" title="Артур Суилин">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="https://suilin.ru/project/post_time/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@asuilin">
+  <meta property="twitter:creator" content="@asuilin">
+  
+  <meta property="og:site_name" content="Артур Суилин">
+  <meta property="og:url" content="https://suilin.ru/project/post_time/">
+  <meta property="og:title" content="Предсказание времени поста в Instagram | Артур Суилин">
+  <meta property="og:description" content="Аудиторию блогера в Инстаграм можно разделить на активную (те, кто лайкают посты) и пассивную (те, кто подписан, но не ставит лайки). Для рекламодателей активная аудитория особенно интересна, поэтому её свойства (соцдем, интересы и т.п.) лучше определять отдельно. Чтобы выделить активную аудиторию, очевидно, необходимо получить лайки к постам. Проблема в том, что у крупных блогеров могут быть миллионы лайков, а Инстаграм за один запрос отдаёт весьма ограниченное количество последних лайков, поэтому получение всех лайков от постов всех блогеров технически затруднительно.">
+  
+  
+    
+  <meta property="og:image" content="https://suilin.ru/img/me_sq.jpg">
+  <meta property="og:locale" content="ru">
+  
+  <meta property="article:published_time" content="2018-11-27T00:00:00&#43;03:00">
+  
+  <meta property="article:modified_time" content="2018-11-27T00:00:00&#43;03:00">
+  
+
+  
+
+  <meta property="og:type" content="article"/>
+<meta name="yandex-verification" content="5753f991e1c3d96c" />
+<meta name="google-site-verification" content="5sd_7MZqiS3rR-1B3f-FqUkrWEd92TYr9FNEGkFE14I" />
+
+<script type="text/javascript" >
+  (function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+      try {
+        w.yaCounter21550249 = new Ya.Metrika2({
+          id:21550249,
+          clickmap:true,
+          trackLinks:true,
+          accurateTrackBounce:true,
+          webvisor:true
+        });
+      } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+      s = d.createElement("script"),
+      f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = "https://mc.yandex.ru/metrika/tag.js";
+
+    if (w.opera == "[object Opera]") {
+      d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+  })(document, window, "yandex_metrika_callbacks2");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/21550249" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+
+
+  <title>Предсказание времени поста в Instagram | Артур Суилин</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Артур Суилин</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Переключить навигацию">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/">
+            
+            <span>Главная</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/post/">
+            
+            <span>Блог</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/project/">
+            
+            <span>Проекты</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#contact">
+            
+            <span>Контакты</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article article-project" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">Предсказание времени поста в Instagram</h1>
+
+  
+  <p class="page-subtitle">Проект был выполнен для компании Deep.Social</p>
+  
+
+  
+    
+
+<div class="article-metadata">
+
+  
+  
+  <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Артур Суилин">
+  </span>
+  
+
+  <span class="article-date">
+    
+    <meta content="2018-11-27 00:00:00 &#43;0300 MSK" itemprop="datePublished">
+    <time datetime="2018-11-27 00:00:00 &#43;0300 MSK" itemprop="dateModified">
+      27.11.2018
+    </time>
+  </span>
+  <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Артур Суилин">
+  </span>
+
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+</div>
+
+  
+</div>
+
+
+
+  <div class="article-container">
+    
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+<p>Аудиторию блогера в Инстаграм можно разделить на активную (те, кто лайкают
+посты) и пассивную (те, кто подписан, но не ставит лайки). Для рекламодателей
+активная аудитория особенно интересна, поэтому её свойства (соцдем, интересы и т.п.) лучше
+определять отдельно. Чтобы выделить активную аудиторию, очевидно, необходимо
+получить лайки к постам. Проблема в том, что у крупных блогеров могут быть
+миллионы лайков, а Инстаграм за один запрос отдаёт весьма ограниченное количество <em>последних</em> лайков,
+поэтому получение <em>всех</em> лайков от постов <em>всех</em> блогеров технически затруднительно.</p>
+
+<p>Разумная альтернатива это сэмплирование лайков. Если взять, например сэмпл в 10000 лайков,
+то свойства аудитории, рассчитанные по этому сэмплу, будут не сильно
+отличаться от свойств аудитории, посчитанных по миллиону лайков. Но для этого
+сэмплирование должно быть <em>равномерным</em>, то есть у всех &ldquo;лайкеров&rdquo; должны
+быть примерно одинаковые шансы попасть в сэмпл. Равномерный сэмпл можно получить, если забирать последние лайки поста
+ через некоторые интервалы времени.
+Но здесь возникает другая проблема:
+пост собирает основную часть лайков в первые несколько часов своей жизни.
+Поэтому если не успеть вовремя обнаружить новый пост, основная масса лайков
+уже не будет доступна, можно будет делать сэмпл только из &ldquo;хвоста&rdquo; лайкеров,
+что приведёт к искажению статистики. Опоздав всего на час, мы пропустим 20-30% всех лайков.</p>
+
+<p>Самый простой вариант борьбы с опозданиями, это проверять, не появились ли новые посты, почаще,
+ например раз в 10 минут. Но этот же вариант и самый неэкономичный
+  по кол-ву запросов в Инстаграм. Блогер вряд ли будет делать посты, когда спит,
+возможно у него есть любимое время для постинга, любимые дни недели, и т.п.
+Если понять индивидуальное &ldquo;расписание&rdquo; каждого блоггера и подстроить под
+него наши проверки, можно будет получить хорошую экономию запросов.</p>
+
+<h2 id="как-постят-блоггеры">Как постят блоггеры</h2>
+
+<p>Чтобы понять, есть ли у нас шансы выявить поведенческие паттерны блоггеров,
+визуализируем некоторые имеющиеся данные.
+
+
+
+<figure>
+
+<img src="image42.png" alt="Распределение интервалов между постами, I" width="422" height="254" />
+
+
+
+<figcaption data-pre="Рис. " data-post=":" >
+  
+  <p>
+    Распределение интервалов между постами, I
+    
+    
+    
+  </p> 
+</figcaption>
+
+</figure></p>
+
+<p>Хорошо видны пики 24-48-72 часа, соответствующие постингу раз в сутки/двое/трое в одно и то же время.
+То есть у многих блогеров есть &ldquo;любимое&rdquo; время постинга, и интервал между их постами
+получается кратным 24 часам.</p>
+
+
+
+
+<figure>
+
+<img src="image47.png" alt="Распределение интервалов между постами, II" width="410" height="255" />
+
+
+
+<figcaption data-pre="Рис. " data-post=":" >
+  
+  <p>
+    Распределение интервалов между постами, II
+    
+    
+    
+  </p> 
+</figcaption>
+
+</figure>
+
+<p>На меньшем масштабе заметны пики, соответствующие постингу раз в час или в несколько часов.
+Возможно, это следы работы сервисов отложенного постинга.</p>
+
+
+
+
+<figure>
+
+<img src="image48.png" alt="Количество постов по времени суток, по всему Инстаграму." width="416" height="258" />
+
+
+
+<figcaption data-pre="Рис. " data-post=":" >
+  
+  <p>
+    Количество постов по времени суток, по всему Инстаграму.
+    
+    
+    
+  </p> 
+</figcaption>
+
+</figure>
+
+<p>Хорошо заметны внутрисуточные подъемы и спады активности, связанные с естественными суточными ритмами
+ &ldquo;сон-бодрствование&rdquo; и разной активностью в рабочее и нерабочее время.</p>
+
+<p>Аудитория Инстаграма интернациональна и распределена по всему миру по разным часовым поясам.
+Чтобы лучше понять природу подъемов и спадов, визуализируем аудиторию из разных стран по отдельности:</p>
+
+
+
+
+<figure>
+
+<img src="image1.png" alt="Количество постов по времени суток, раздельно по странам." width="616" height="353" />
+
+
+
+<figcaption data-pre="Рис. " data-post=":" >
+  
+  <p>
+    Количество постов по времени суток, раздельно по странам.
+    
+    
+    
+  </p> 
+</figcaption>
+
+</figure>
+
+<p>На графиках отдельных стран суточная цикличность выражена еще более явно.
+Также в некоторых странах заметно нарастание активности до начала рабочего дня и после его окончания.</p>
+
+<h2 id="детализированные-паттерны-постинга">Детализированные паттерны постинга</h2>
+
+<p>Визуальный анализ общей активности показывает, что посты распределяются
+внутри суток неравномерно, есть определенные закономерности.
+А сейчас от общего анализа перейдем к более подробной детализации, и посмотрим, как делают посты индивидуальные блоггеры.</p>
+
+<h3 id="стабильные-блогеры">Стабильные блогеры</h3>
+
+<p>Сначала посмотрим на &ldquo;стабильных&rdquo; блогеров, у которых минимальна
+дисперсия интервалов между постами. Видно, что такие блогеры делают посты
+в основном строго раз в 24 часа, с небольшими отклонениями:
+
+
+
+<figure>
+
+<img src="image19.png" width="840" height="441" />
+
+
+</figure></p>
+
+<h3 id="нестабильные-блогеры">Нестабильные блогеры</h3>
+
+<p>На следующем графике &ndash; &ldquo;нестабильные&rdquo; блогеры, у которых высокая вариативность
+ интервалов между постами. В основном это те, кто делает постинг пакетами по 2-3 поста,
+  с большой паузой между пакетами. Видно, как интервал между постами циклически изменяется от секунд до нескольких суток:
+
+
+
+<figure>
+
+<img src="image39.png" width="840" height="429" />
+
+
+</figure></p>
+
+<h3 id="быстрые-блоггеры">Быстрые блоггеры</h3>
+
+<p>На этом графике блоггеры с минимальным интервалом между постами, т.е.
+ создающие много постов в час. В основном это аккаунты магазинов,
+ выкладывающие в Instagram свой товарный каталог. Видны регулярные паузы
+  между постингами (единичные всплески вверх), по видимому они постят
+ только в рабочее время, а в нерабочее и по выходным - отдыхают.
+
+
+
+<figure>
+
+<img src="image30.png" width="840" height="429" />
+
+
+</figure></p>
+
+<h3 id="медленные-блоггеры">Медленные блоггеры</h3>
+
+<p>На этом графике блоггеры с максимальным интервалом между постами, т.е. с редкими постами.
+Каких либо явных закономерностей здесь не прослеживается:
+
+
+
+<figure>
+
+<img src="image9.png" width="840" height="434" />
+
+
+</figure></p>
+
+<p>Итак, мы увидели, что с одной стороны в posting patterns есть множество явных закономерностей,
+ с другой стороны у разных блогеров эти закономерности разные, а у многих вообще отсутствуют.
+Создать вручную набор правил, который одинаково хорошо подходил бы любому блогеру,
+не представляется возможным. Решить эту задачу за разумное время можно только с помощью машинного обучения.</p>
+
+<h2 id="пробуем-machine-learning">Пробуем machine learning</h2>
+
+<h3 id="немного-теории">Немного теории</h3>
+
+<p>Первый вопрос, который надо задать при разработке machine learning модели &ndash;
+что мы, собственно, хотим предсказать? С первого взгляда кажется, что надо предсказывать время следующего поста.
+То есть наша модель должна обучиться функции:
+$$t_{i+1} = f(t_0, \dots, t_{i})$$</p>
+
+<p>где $t_0, \dots, t_{i}$ это история времени предыдущих постов, а $t_{i+1}$ это время следующего поста, которое мы хотим предсказать.</p>
+
+<p>Но на самом деле это плохая идея. Предсказывать точное время следующего поста это все равно,
+ что предсказывать итог бросания монетки. Если монета честная, то мы знаем,
+что в среднем итог бросков будет 50/50.
+Но предсказать итог каждого конкретного броска невозможно. Та же ситуация с блогером:
+ допустим, мы знаем, что он предпочитает делать посты по вечерам.
+Но в конкретный день он может не сделать пост, потому что находится в поездке,
+или сделать пост позже обычного, потому что у него были другие дела, или наоборот сделать сразу два поста.
+Чтобы предсказывать точное время, нам  потребовалось бы знать множество фактов из жизни блогера,
+которых у нас нет.</p>
+
+<p>Поэтому лучше предсказывать вероятность того, что блогер сделает пост в
+определённом интервале времени. Вероятность единичных событий, происходящих на фиксированном отрезке времени,
+в простейшем случае описывается распределением Пуассона:
+$$\Pr(k)=\frac{\lambda^k}{k!}e^{\lambda}$$</p>
+
+<ul>
+<li>$k$ &ndash; наблюдаемое количество событий за единицу времени (в нашем случае события это посты, а за единицу времени можно взять, например, сутки);</li>
+<li>$\lambda$ &ndash; математическое ожидание количества событий за единицу времени, т.е. среднее количество событий.
+Этот параметр еще называют интенсивностью.</li>
+</ul>
+
+<p>Допустим, блогер делает в среднем 3 поста в сутки ($\lambda=3$).
+Тогда, согласно распределению Пуассона, у нас получаются следующие вероятности увидеть $k$ постов за один конкретный день:</p>
+
+<ul>
+<li>вероятность увидеть 0 постов (т.е. ни одного):
+$$\Pr(k=0)=\frac{2^0}{0!}e^{-3}=\frac{1}{1}e^{-3}\approx0.05$$</li>
+<li>вероятность увидеть 1 пост:
+$$\Pr(k=1)=\frac{3^1}{1!}e^{-3}=\frac{3}{1}e^{-3}\approx0.15$$</li>
+</ul>
+
+<p>остальные значения выведены на график:
+
+
+
+<figure>
+
+<img src="image44.png" width="505" height="278" />
+
+
+</figure></p>
+
+<p>Если бы блоггеры всегда делали посты с одинаковой интенсивностью, т.е.
+ соблюдалось бы условие $\lambda=const$, то на этом можно было бы закончить наш анализ,
+и даже не понадобилось бы машинное обучение.
+Но в реальной жизни интенсивность все время изменяется.
+Блогер может открыть для себя новую тематику, вдохновиться ею, и начать делать посты в несколько раз чаще, чем обычно.
+Или наоборот, блогер может забросить свой аккаунт, переключившись на что-то другое, или уехать в отпуск, и вообще перестать делать посты.
+В этом случае интенсивность будет стремиться к нулю. Таким образом, в реальной жизни это не константа, а функция от времени:</p>
+
+<p>$$\lambda=f(t)$$</p>
+
+<p>Наша задача &ndash; найти эту функцию, тогда мы сможем оценить вероятность появления нового поста в произвольный момент времени,
+и смоделировать поведение блогеров.</p>
+
+<h2 id="от-теории-к-практике">От теории к практике</h2>
+
+<p>Построим модель, которая обучится целевой функции:
+$$\lambda=f(t, h)$$
+где $h$ &ndash; история предыдущих постов блогера, $t$ &ndash; относительное время, прошедшее с момента последнего поста.</p>
+
+<p>Будем предсказывать интенсивность для следующих 24 часов после момента времени $t$.
+Для обучения необходимо задать loss function, показывающую, насколько хорошо работают наши предсказания.
+Будем использовать negative log likelihood:</p>
+
+<p>$$loss=-\log(Pr_{\lambda}(X=x\mid t))$$
+ это вероятность наблюдения в течение 24 следующих часов после момента времени $t$
+количества постов, равного $x$, для распределения Пуассона, характеризуемого параметром $\lambda$.
+Количество постов  берется из реальных данных. Чем точнее мы предсказали значение $\lambda$,
+ тем выше будет вычисленная по реальному количеству постов вероятность, и тем меньше будет loss.</p>
+
+<p>Для обучения будем использовать deep learning model, состоящую из <a href="https://en.wikipedia.org/wiki/Recurrent_neural_network" target="_blank">Recurrent Neural Network</a>
+и нескольких fully connected layers.
+На входы RNN подаётся история предыдущих постов блогера, на вход fully connected layers блока &ndash; состояния на выходе из RNN и время $t$.</p>
+
+<p>Посмотрим, что получается в результате обучения, на примерах постов отдельных блоггеров.
+Голубым обозначена предсказанная интенсивность, оранжевыми треугольниками и вертикальными линиями - моменты времени, когда происходили посты.
+В идеале в те моменты, когда происходил постинг, предсказанная интенсивность
+должна быть высокой, а в моменты, когда постов не было &ndash; низкой:</p>
+
+
+
+
+<figure>
+
+<img src="image24.png" width="834" height="126" />
+
+
+</figure>
+
+<p>Видно, что при повышении частоты постов предсказанное значение параметра $\lambda$,
+ как и ожидалось, растет, а при отсутствии постов падает. Когда блогер перестал делать новые посты,
+значение $\lambda$ упало практически до нуля. В момент, когда происходит новый пост после долгой паузы,
+значение $\lambda$ скачкообразно повышается, т.к. модель видит, что блогер still alive, и начинает ожидать от него потока новых постов.</p>
+
+<p>Фактически, мы смоделировали самовозбуждающийся <a href="https://arxiv.org/pdf/1708.06401.pdf" target="_blank">Hawkes process</a>,
+не используя при этом никакой сложной параметризованной математики &ndash;
+deep learning модель сама обучилась всем закономерностям!</p>
+
+
+
+
+<figure>
+
+<img src="image43.png" width="840" height="128" />
+
+
+</figure>
+
+<p>На втором примере модель, пронаблюдав историю постов в первые три месяца, выявила &ldquo;любимые дни&rdquo; блогера,
+когда он делает посты. Соответственно, предсказанная интенсивность начинает повышаться заранее, в ожидании того,
+что блогер скоро сделает пост. Даже когда постов нет, ожидаемая интенсивность все равно циклически повышается и понижается.</p>
+
+<p>
+
+
+<figure>
+
+<img src="image3.png" width="840" height="128" />
+
+
+</figure>
+На третьем примере моделью тоже выявлена недельная сезонность, но немного другого вида:
+блогер обычно не делает посты по выходным. В течение рабочей недели примерно одинаковая высокая интенсивность,
+по выходным интенсивность падает.</p>
+
+<p>Как видим, наша модель вполне способна выявить поведенческие паттерны блогера,
+и предсказывать вероятность постов во времени в соответствии с этими паттернами.</p>
+
+<h2 id="модель-для-реального-применения">Модель для реального применения</h2>
+
+<p>Модель, предсказывающая интенсивность (т.е. параметр $\lambda$ для распределения Пуассона),
+ хороша с теоретической точки зрения. Но она не дает прямого ответа на вопрос,
+ который нас интересует на практике: когда надо проверять, не появился ли новый пост?
+Чтобы получить ответ на этот вопрос, необходимо проинтегрировать функцию интенсивности:</p>
+
+<p>$$\Lambda=\int_{t_{0}}^{t&rsquo;} \mathrm\lambda(t)\,\mathrm{d}t$$</p>
+
+<p>где $t_0$ &ndash; текущее время, $t&rsquo;$ &ndash; предполагаемое время проверки.</p>
+
+<p>Сначала надо положить $t&rsquo;=t_0$, и потом постепенно увеличивать $t&rsquo;$,
+ пока вычисленное значение интеграла  не станет больше некоторого заранее выбранного порога.
+Понятно, что вычисление интеграла числовой аппроксимацией по отдельным точкам,
+в которых модель рассчитала предсказания для $\lambda$, это неточная, неудобная и ресурсоемкая процедура.
+Поэтому для реального использования лучше сделать другую модель, которая сразу будет предлагать время проверки.</p>
+
+<p>Как и с предыдущей моделью, нам надо определить, какая будет loss function.
+Необходимо соблюсти одновременно два условия, противоречащие друг другу:
+с одной стороны, надо делать проверки как можно реже, чтобы не генерировать большое кол-во запросов к Instagram.
+ С другой стороны, надо минимизировать опоздания, т.е. обнаруживать пост в тот момент, когда он еще не накопил много лайков.
+Для минимизации опозданий надо наоборот проверять как можно чаще. Наша loss function должна выражать баланс между этими двумя условиями.</p>
+
+<p>Для начала разберемся с тем, как оценивать опоздания. Рост количества лайков в посте происходит нелинейно,
+вначале он очень быстрый, потом затухает, и к истечению двух дней с момента публикации поста рост практически прекращается.
+Прирост лайков в разных постах можно визуализировать таким суммарным графиком:
+
+
+
+<figure>
+
+<img src="image29.png" width="509" height="318" />
+
+
+</figure></p>
+
+<p>Приблизительно смоделировать зависимость кол-ва лайков от времени можно формулой:
+$$likes=1-e^{-\left(\frac{t}{\alpha}\right)^{\beta}}$$
+где $t$ &ndash; время в часах;
+$\alpha, \beta$ &ndash; подбираемые эмпирические коэффициенты. Для нашего случая $\alpha=4.2, \beta=0.7$.
+Смоделированные значения показаны голубой линией на графике.
+Используя эту формулу, мы можем оценить опоздание, как долю от общего кол-ва лайков, которую мы пропустили.
+Таким образом, опоздание будет величиной в интервале $[0,1]$. Это первая часть нашей loss function.</p>
+
+<p>Второй частью будет оценка частоты проверок &ndash; инвертированная длина предсказанного интервала между
+ текущим временем и временем следующей проверки. Чем длинее эти интервалы, тем меньше будет проверок.
+Итоговый loss складывается из потерь по лайкам $loss_{l}$ и потерь по опозданиям $loss_{f}$:</p>
+
+<p>$$loss =  loss_{l} + k \cdot loss_{f}$$</p>
+
+<p>где $k$ это коэффициент, регулирующий баланс между частотой проверок и размером опозданий.
+Выставляется вручную, исходя из бизнес соображений: какой есть бюджет на проверки и насколько критичны опоздания.
+При увеличении коэффициента частота проверок снижается и опоздания растут, при уменьшении наоборот.</p>
+
+<p>$$loss_{f} = \hat{t}^{-1}$$
+$$loss_{l} = \sum_{i=1}^{n} loss_{p_i}$$
+$$loss_{p_i} =
+  \begin{cases}
+    1-\exp\left(-\left(\frac{\hat{t}-t^{post}_i}{\alpha}\right)^{\beta}\right)       &amp; \quad \text{if } \hat{t}-t^{post}_i &gt; 0\\<br />
+    0  &amp; \quad \text{otherwise}
+  \end{cases}
+$$</p>
+
+<ul>
+<li>$\hat{t}$ &ndash; предсказанный временной интервал от текущего времени до следующей проверки.</li>
+<li>$n$ &ndash; количество будущих постов, т.е. постов, будут сделаны после текущего времени.</li>
+<li>$t^{post}_i$ &ndash; временной интервал от текущего времени до $i$-го будущего постоа.</li>
+<li>$loss_{p_i}$ &ndash; потери по лайкам для каждого будущего поста. Потери учитываются,
+только если произошло опоздание, т.е. для поста выполнятся условие $\hat{t}-t^{post}_i &gt; 0$, в противном
+случае потери равны нулю.</li>
+<li>$\alpha, \beta$ &ndash; коэффициенты для моделирования динамики лайков, о которых говорилось выше.</li>
+</ul>
+
+<p>Во время обучения будем каждый раз выбирать случайным образом момент текущего времени внутри
+истории постов аккаунта, и предсказывать время следующей проверки относительно этого текущего времени.
+Таким образом, после достаточно длительного обучения, мы попадем почти в каждый интервал между постами,
+и сделаем предсказания для множества разных мест в истории.</p>
+
+<h2 id="результаты">Результаты</h2>
+
+<p>Посмотрим, какие результаты дает обученная модель. Будем визуализировать на timeline одновременно и реальные посты, и точки проверок,
+предсказанные нашей моделью. В идеале, если бы нам было известно, когда блогер сделает пост,
+каждая проверка была бы сразу после появления нового поста, а в интервалах между постами проверок не было бы вообще,
+или они были бы очень редкими. Но этот идеал, как уже обсуждалось в начале этой статьи, недостижим.
+С другой стороны, можно вообще не применять никаких моделей, и просто проверять, например раз в час,
+не появились ли у блогера новые посты. Тогда проверки будут равномерно распределены в интервалах между постами,
+но будет много лишних проверок.</p>
+
+<p>Проверки, полученные с помощью нашей модели, должны быть где-то между этими двумя крайними случаями.
+Т.е. на временных интервалах, где вероятность нового поста мала, проверки должны быть редкими,
+а на интервалах, где велика вероятность обнаружить новый пост, проверки должны быть более частыми.</p>
+
+<p>Будем отображать проверки в виде светло-зеленых маленьких точек, а посты в виде более крупных точек,
+окрашенных в цветовой шкале от синего до желтого, в зависимости от того,
+какое количество лайков мы пропустили из-за опоздания:
+
+
+
+<figure>
+
+<img src="image49.png" width="542" height="68" />
+
+
+</figure></p>
+
+<p>Также надо помнить, что лайки нарастают очень быстро, при опоздании всего на 10 минут мы пропускаем 10% лайков,
+ при опоздании на полчаса – 20% лайков, при опоздании на час – 30% лайков.</p>
+
+<p>Посмотрим на предсказания нашей модели для блогеров из тестовой выборки (т.е. блоггеров, которых модель не видела во время обучения):
+
+
+
+<figure>
+
+<img src="image50.png" width="840" height="80" />
+
+
+</figure></p>
+
+<p>На первой диаграмме показана вся история одного блогера.
+По оси Y - интервалы между проверками, т.е. чем выше зеленая точка, тем больше интервал.
+Видно, что в начале истории модель адаптируется к поведению блогера,
+ наблюдаются довольно сильные опоздания, и короткие интервалы между проверками.
+Потом, по мере накопления информации о привычках блогера, проверки становятся более редкими и более точными.</p>
+
+<p>
+
+
+<figure>
+
+<img src="image15.png" width="840" height="80" />
+
+
+</figure>
+На второй диаграмме показан участок истории того же блогера, когда модель вышла на стабильный режим работы.
+Видна явная суточная цикличность, проверки ночью делаются намного реже, проверки днем - чаще.
+Время постов совпадает с периодами наиболее частых проверок, т.е. наша модель успешно обучилась.</p>
+
+<p>Рассмотрим ещё один аккаунт. На первом графике видно, как модель постепенно увеличивает интервал между проверками (зеленые точки уходят выше), если блогер не делает новых постов. Действительно, зачем часто проверять аккаунт, если он ничего не постит?
+
+
+
+<figure>
+
+<img src="image28.png" width="840" height="80" />
+
+
+</figure>
+
+
+
+<figure>
+
+<img src="image52.png" width="840" height="80" />
+
+
+</figure>
+На втором графике видно, как модель адаптируется к изменяющемуся поведению блоггера. Сначала блогер делал один пост в день, и на диаграмме частоты проверок видно явное увеличение частоты в середине дня, когда вероятность поста максимальна. Потом блоггер начинает делать два поста в день, и хорошо видно, как проверки быстро адаптируются к новому поведению: вместо одной впадины, соответствующей уменьшению интервала между проверками в середине дня, мы начинаем наблюдать в правой половине графика &ldquo;площадки&rdquo;, соответствующие равномерно уменьшенному интервалу в течение всего дня.</p>
+
+<p>Успешная работа модели подтверждается не только визуально, но и цифрами. Если интервалы между проверками задаются нашей моделью, то для получения того же среднего процента пропущенных лайков (~15%) требуется сделать в 2-4 раза меньше проверок по сравнению с baseline. За baseline принимаются равномерные проверки раз в N минут. Если же наоборот зафиксировать кол-во проверок и сравнивать процент пропущенных лайков, то у модели он будет в 1.5-2 раза меньше, чем у baseline.</p>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/instagram/">Instagram</a>
+  
+  <a class="badge badge-light" href="/tags/deep.social/">Deep.Social</a>
+  
+</div>
+
+
+
+    
+
+
+
+
+
+
+<div class="media author-card" itemscope itemtype="http://schema.org/Person">
+  
+  <img class="portrait mr-3" src="/img/me_sq.jpg" itemprop="image" alt="Avatar">
+  
+  <div class="media-body">
+    <h5 class="card-title" itemprop="name"><a href="/">Артур Суилин</a></h5>
+    <h6 class="card-subtitle">Chief Data Scientist</h6>
+    
+    <ul class="network-icon" aria-hidden="true">
+      
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="//www.linkedin.com/in/suilin-arthur-304b8219/" target="_blank" rel="noopener">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="//github.com/Arturus" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="//www.kaggle.com/asuilin" target="_blank" rel="noopener">
+          <i class="fab fa-kaggle"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="//instagram.com/asuilin" target="_blank" rel="noopener">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+  </div>
+</article>
+
+
+<div class="article-container article-widget">
+  <div class="post-nav">
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="https://suilin.ru/project/gender_age/" rel="prev">Определение пола и возраста по фото</a>
+  </div>
+  
+</div>
+
+</div>
+
+
+<div class="container">
+  <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    &copy; 2018 &middot; Артур Суилин &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+</div>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+    
+    
+    <script src="/js/mathjax-config.500a6cbb2c0f345fcecc21b3116d6637aa78f1f11db8081ea581abe05390c2e8f3bbffe61be3cf0217baf785c40efceabe51050a4f007e69af94efd3643260e8.js" integrity="sha512-UApsuywPNF/OzCGzEW1mN6p48fEduAgepYGr4FOQwujzu//mG&#43;PPAhe694XEDvzqvlEFCk8AfmmvlO/TZDJg6A=="></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    <script src="/js/hugo-academic.js"></script>
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    <script>
+      
+      window.lazyLoadOptions = {elements_selector: ".lazy"};
+    </script>
+    <script async src="https://cdn.jsdelivr.net/npm/intersection-observer@0.5.1/intersection-observer.js"></script>
+    <script async src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@11.0.5/dist/lazyload.min.js"></script>
+
+  </body>
+</html>
+

@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 3.0.0">
+  <meta name="generator" content="Hugo 0.53" />
+  <meta name="author" content="Артур Суилин">
+
+  
+  
+  
+  
+    
+  
+  <meta name="description" content="В идеальном мире маркетолог или владелец бизнеса не только работает с &ldquo;конверсиями&rdquo;, но использует для оценки посетителей сайта Customer Lifetime Value (сокращённо CLV) &ndash; грубо говоря, это сумма денег, которую принесёт посетитель за всё время, пока будет пользоваться сервисом. Оценка клиентов по CLV является предпочтительной и для мобильных приложений, и для игр, и для любых онлайн сервисов.
+Но в реальной жизни всё, конечно, не так, как в идеальном мире. Чтобы рассчитать CLV клиента, нужны исходные данные: средний чек, частота покупок, и время &ldquo;удержания&rdquo;, т.">
+
+  
+  <link rel="alternate" hreflang="ru" href="https://suilin.ru/post/clv/">
+
+  
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#086377">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous">
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Fira+Sans+Condensed:400,400italic,700|PT+Mono|Fira+Sans|PT+Serif:400,400italic,700">
+  
+
+  <link rel="stylesheet" href="/styles.css">
+  
+  <link rel="stylesheet" href="/css/custom.css">
+  
+
+  
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-38480657-1', 'auto');
+      
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="//www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
+  
+
+  
+  <link rel="alternate" href="https://suilin.ru/index.xml" type="application/rss+xml" title="Артур Суилин">
+  <link rel="feed" href="https://suilin.ru/index.xml" type="application/rss+xml" title="Артур Суилин">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="https://suilin.ru/post/clv/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@asuilin">
+  <meta property="twitter:creator" content="@asuilin">
+  
+  <meta property="og:site_name" content="Артур Суилин">
+  <meta property="og:url" content="https://suilin.ru/post/clv/">
+  <meta property="og:title" content="Конверсия и data science V. А сколько корова даёт молока? | Артур Суилин">
+  <meta property="og:description" content="В идеальном мире маркетолог или владелец бизнеса не только работает с &ldquo;конверсиями&rdquo;, но использует для оценки посетителей сайта Customer Lifetime Value (сокращённо CLV) &ndash; грубо говоря, это сумма денег, которую принесёт посетитель за всё время, пока будет пользоваться сервисом. Оценка клиентов по CLV является предпочтительной и для мобильных приложений, и для игр, и для любых онлайн сервисов.
+Но в реальной жизни всё, конечно, не так, как в идеальном мире. Чтобы рассчитать CLV клиента, нужны исходные данные: средний чек, частота покупок, и время &ldquo;удержания&rdquo;, т.">
+  
+  
+    
+  <meta property="og:image" content="https://suilin.ru/img/me_sq.jpg">
+  <meta property="og:locale" content="ru">
+  
+  <meta property="article:published_time" content="2019-03-20T00:00:00&#43;03:00">
+  
+  <meta property="article:modified_time" content="2019-03-20T00:00:00&#43;03:00">
+  
+
+  
+
+  <meta property="og:type" content="article"/>
+<meta name="yandex-verification" content="5753f991e1c3d96c" />
+<meta name="google-site-verification" content="5sd_7MZqiS3rR-1B3f-FqUkrWEd92TYr9FNEGkFE14I" />
+
+<script type="text/javascript" >
+  (function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+      try {
+        w.yaCounter21550249 = new Ya.Metrika2({
+          id:21550249,
+          clickmap:true,
+          trackLinks:true,
+          accurateTrackBounce:true,
+          webvisor:true
+        });
+      } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+      s = d.createElement("script"),
+      f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = "https://mc.yandex.ru/metrika/tag.js";
+
+    if (w.opera == "[object Opera]") {
+      d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+  })(document, window, "yandex_metrika_callbacks2");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/21550249" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+
+
+  <title>Конверсия и data science V. А сколько корова даёт молока? | Артур Суилин</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Артур Суилин</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Переключить навигацию">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/">
+            
+            <span>Главная</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/post/">
+            
+            <span>Блог</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/project/">
+            
+            <span>Проекты</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#contact">
+            
+            <span>Контакты</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">Конверсия и data science V. А сколько корова даёт молока?</h1>
+
+  
+  <p class="page-subtitle">Или прогнозируем Customer Lifetime Value</p>
+  
+
+  
+    
+
+<div class="article-metadata">
+
+  
+  
+  <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Артур Суилин">
+  </span>
+  
+
+  <span class="article-date">
+    
+    <meta content="2019-03-20 00:00:00 &#43;0300 MSK" itemprop="datePublished">
+    <time datetime="2019-03-20 00:00:00 &#43;0300 MSK" itemprop="dateModified">
+      20.03.2019
+    </time>
+  </span>
+  <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Артур Суилин">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    13 min read
+  </span>
+  
+
+  
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder"></i>
+    
+    <a href="/categories/internet-analytics/">Internet analytics</a>
+    
+  </span>
+  
+  
+
+  
+  
+
+  
+
+</div>
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+<p>В идеальном мире маркетолог или владелец бизнеса не только работает с
+&ldquo;конверсиями&rdquo;, но использует для оценки посетителей сайта
+Customer Lifetime Value (сокращённо CLV) &ndash; грубо говоря, это сумма денег, которую
+принесёт посетитель за всё время, пока будет пользоваться сервисом.
+Оценка клиентов по CLV является предпочтительной и для мобильных
+приложений, и для игр, и для любых онлайн сервисов.</p>
+
+<p>Но в реальной жизни всё, конечно, не так, как в идеальном мире. Чтобы рассчитать CLV клиента,
+нужны исходные данные: средний чек, частота покупок, и время &ldquo;удержания&rdquo;, т.е.
+как долго клиент будет пользоваться сервисом.</p>
+
+
+
+
+<figure>
+
+<img src="clv.png" width="347" height="84" />
+
+
+</figure>
+
+<ul>
+<li>Все эти параметры, во-первых, вообще неизвестны для нового посетителя, который
+только что пришёл на сайт.</li>
+<li>Во-вторых, параметры &ldquo;средний чек&rdquo; и &ldquo;частота покупок&rdquo;
+подразумевают достаточный объем накопленной статистики по каждому клиенту, как минимум
+3-5 покупок. В реальной жизни такая статистика накапливается у очень небольшого
+процента посетителей.</li>
+<li>В третьих, время удержания конкретного клиента заранее неизвестно,
+а среднее время удержания, рассчитанное по сегменту посетителей, имеет огромную дисперсию:
+один посетитель перестал заходить на сайт сразу после первого визита (время удержания ноль),
+второй пользуется в течение двух лет. И каким, например, надо считать время удержания
+посетителя, который появился на сайте только вчера? (кстати, это интересная тема для
+<a href="../user_churn/">следующей статьи</a>).</li>
+</ul>
+
+<p>Всё это делает расчёт CLV для индивидуального посетителя вообще невозможным,
+а расчёт для сегмента посетителей &ndash; крайне ненадёжным, особенно для небольших
+сегментов, и новых посетителей.</p>
+
+<p>В то же время было бы очень заманчивым использовать CLV, например, для
+оценки трафика, генерируемого рекламными кампаниями и даже отдельными
+рекламными объявлениями. Как это сделать?</p>
+
+
+
+
+<figure>
+
+<img src="looking-to-the-future.jpg" width="512" height="342" />
+
+
+</figure>
+
+<h2 id="как-заглянуть-в-будущее">Как заглянуть в будущее</h2>
+
+<p>В <a href="../conversion_factors">предыдущих</a> <a href="../conversion_history">статьях</a>
+мы прогнозировали конверсию, которая произойдёт
+или не произойдет после перехода на сайт. Но ничего не мешает
+расширить горизонт прогноза, и в буквальном смысле заглядывать в будущее &ndash;
+предсказывать, сколько конверсий
+будет у посетителя в течение определённого интервала времени, например
+следующих двух месяцев. Это будет не совсем классический CLV, поскольку
+прогноз делается для конечного интервала, а не &ldquo;на всю жизнь&rdquo;, тем
+не менее такой прогноз вполне достаточен для решения многих
+маркетинговых задач. Более того, вместо конверсий можно предсказывать
+сумму заказов &ndash; это уже почти CLV.</p>
+
+<p>В отличие от классического расчёта CLV через предрассчитанные параметры клиентов (удержание,
+средний чек, частота), прогноз CLV моделью машинного обучения не требует
+никаких предварительных расчётов и
+работает на <strong>индивидуальном</strong> для каждого клиента уровне, что позволяет
+легко сравнивать клиентов друг с другом и группировать в сегменты по
+ожидаемой выручке.</p>
+
+<h3 id="что-прогнозируем">Что прогнозируем</h3>
+
+<p>Будем считать, что количество конверсий $k$ берётся из <a href="https://ru.wikipedia.org/wiki/%D0%A0%D0%B0%D1%81%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5_%D0%9F%D1%83%D0%B0%D1%81%D1%81%D0%BE%D0%BD%D0%B0" target="_blank">распределения Пуассона</a>:
+$$\Pr(k)=\frac{\lambda^k}{k!}e^{-\lambda}$$
+тогда для каждого посетителя надо вычислить его индивидуальный коэффициент $\lambda$,
+обозначающий ожидаемое количество конверсий за единицу времени (в нашем случае
+60 дней).
+Эта задача известна, как <a href="https://en.wikipedia.org/wiki/Poisson_regression" target="_blank">пуассоновская регрессия</a>. В классическом
+варианте она решается через линейную модель, но можно использовать
+любые продвинутые алгоритмы: деревья решений, нейросети и т.п.</p>
+
+<p>Построение моделей и оценку качества будем делать на тех же <a href="../conversion_factors/#%D1%81%D0%B0%D0%B9%D1%82%D1%8B">сайтах</a>,
+что и в предыдущих статьях.</p>
+
+<h3 id="оценка-качества">Оценка качества</h3>
+
+<p>Качество регрессии традиционно оценивается или через абсолютную ошибку
+<a href="https://en.wikipedia.org/wiki/Mean_squared_error" target="_blank">MSE</a> (среднеквадратичная ошибка)
+или
+<a href="https://en.wikipedia.org/wiki/Mean_absolute_error" target="_blank">MAE</a> (средняя абсолютная ошибка),
+или через через относительную ошибку, например <a href="https://en.wikipedia.org/wiki/Mean_absolute_percentage_error" target="_blank">MAPE</a>
+ (Mean Absolute Percentage Error).
+К сожалению, все эти способы подразумевают, что целевая переменная
+имеет нормальное или близкое к нему распределение, и для нашей задачи
+не подходят. Поясню на примерах:</p>
+
+<p>Если использовать абсолютную ошибку, то разница
+между 10 конверсиями и 11 конверсиями будет такой же, как разница между нулём конверсий
+и одной конверсией. Но с точки зрения бизнеса, ноль конверсий и одна конверсия
+это большая разница, а 10 и 11 &ndash; незначительная.</p>
+
+<p>Если использовать относительную ошибку, то в случае, когда предсказана
+одна конверсия, а в реальности было ноль конверсий, ошибка станет бесконечной &ndash; так тоже не годится.
+Можно добавлять к истинному значению сглаживающую константу $\epsilon$, чтобы
+избежать деления на 0, но такая ошибка станет просто абстрактным числом,
+не имеющим внятной интерпретации.</p>
+
+<p>Более приемлемым вариантом оказалось использование метрики <a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic#Area_under_the_curve" target="_blank">AUC</a>,
+только для регрессионных задач она называется Concordance index (c-index, c-statistic), и интерпретируется
+не как площадь под кривой, а как вероятность того, что в
+парах &ldquo;прогноз &ndash; истинное значение&rdquo;, относящимся к двум случайно выбранным примерам,
+прогнозы будут правильно отранжированы.
+Т.е. если истинное значение в первой паре больше значения во второй паре, то
+и прогноз из первой пары будет больше прогноза из второй пары.</p>
+
+<p>Concordance index не чувствителен к калибровке прогноза, это тоже важно
+(вопроса калибровки коснёмся немного позже).</p>
+
+<h2 id="входные-данные">Входные данные</h2>
+
+<p>Будем использовать такой же набор признаков, как и в <a href="../conversion_history/#%D0%BA%D0%BE%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%B8%D1%80%D1%83%D0%B5%D0%BC-%D0%BF%D1%80%D0%B8%D0%B7%D0%BD%D0%B0%D0%BA%D0%B8">предыдущей модели</a>,
+за исключением
+признаков, относящихся к текущему переходу на сайт, т.к. в новой модели
+нет &ldquo;текущего&rdquo; перехода. Т.е. оставим только признаки, относящиеся к истории переходов, к истории сессий, и
+к посетителю в целом (браузер, гео, устройство и т.п.).</p>
+
+<p>Кроме этого, нужен ещё один признак, играющий в модели важную роль: время
+с момента последней активности посетителя.</p>
+
+<p>В предыдущих моделях за текущий момент времени принимался момент перехода на сайт.
+Это было удобным для изучения факторов, влияющих на вероятность конверсии, но прогноз,
+который выдавала модель, сам по себе не имел практической ценности. В самом деле,
+какой смысл прогнозировать результат сессии, если можно просто немного подождать,
+сессия закончится сама собой, и результат будет виден и так?</p>
+
+<p>В новой модели мы прогнозируем количество конверсий для произвольной выборки посетителей, которые
+были на сайте <em>когда то раньше</em>. Очевидно, что ожидаемое количество конверсий
+для посетителя, который последний раз зашёл на сайт год назад, и c тех пор не появлялся, будет
+близко к нулю. В то же время посетитель, который заходил на сайт вчера, имеет гораздо больше шансов
+на появление новых конверсий, чем предыдущий. Поэтому время с момента
+последней активности <strong>time_since_last</strong> обязательно должно быть включено в модель.</p>
+
+<p>Но в истории действий посетителей, из которой формируются данные для обучения, нет понятия
+&ldquo;текущее время&rdquo;. В принципе любой момент после первого появления посетителя на сайте может быть выбран, как текущий.
+Тогда то, что было то этого, принимается за историю, а на основе того, что было после, рассчитывается
+целевая переменная, т.е. количество конверсий или сумма заказов.
+<figure >
+<img width="791" height="88" class="lazy" src="history_lr.gif"
+      data-src="history.gif" data-srcset="history@2x.gif 2x">
+  <figcaption><p>$t_0$ &ndash; время первого появления посетителя на сайте; $t_{end}$ &ndash;
+максимальное время в данных; $t_1,\dots,t_9$ &ndash; случайные моменты времени, используемые для обучения.</p>
+</figcaption> 
+</figure></p>
+
+<p>Итак, для каждого посетителя мы будем случайным образом выбирать
+&ldquo;текущий&rdquo; момент времени, причём для одного и того же
+посетителя может быть выбрано несколько разных моментов, относящихся
+к разным периодам его жизни. Заодно мы таким образом проводим
+<a href="https://www.quora.com/What-does-the-term-data-augmentation-mean-in-the-context-of-Machine-Learning" target="_blank">data augmentation</a>:
+из одного физического посетителя генерируем несколько &ldquo;виртуальных&rdquo;.
+От каждого текущего момента отсчитывается 60 дней в будущее и берётся суммарное
+количество конверсий за этот период в качестве целевой переменной.</p>
+
+<p>У посетителей, которые очень давно не были на сайте, количество ожидаемых будущих конверсий стремится к нулю
+(они скорее всего уже никогда не вернутся). Поэтому имеет смысл ограничить
+максимальный период &ldquo;бездействия&rdquo; сроком, например, в 180 дней. Т.е. будем включать
+в обучающую и тестовую выборки только таких посетителей, у которых последнее событие было не позже 180 дней
+от текущего момента времени. У остальных посетителей ожидаемое количество конверсий
+можно считать нулевым.</p>
+
+<h2 id="результаты-shop-ml">Результаты, shop.ml</h2>
+
+<p>На тестовой выборке получен Concordance Index ~94%, это очень хороший показатель.
+В качестве тестовой выборки использовались данные за последние два месяца,
+ которые модель не видела при обучении и настройке (из двенадцати имеющихся месяцев) &ndash; всё, как в реальной жизни.</p>
+
+<p>Чтобы эксперимент был честным, из данных были удалены сессии посетителей,
+которые посещали внутренние домены, недоступные из внешнего мира
+(т.е. сессии персонала магазина и разработчиков). Если не удалять эти данные,
+то модель легко обучается распознавать такие нетипичные сессии, и Concordance
+Index вырастает до 95-96%.</p>
+
+<p>Посмотрим на влияние признаков (методика интерпретации диаграмм
+влияния описана в <a href="../conversion_history/#%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C-%D0%B4%D0%BB%D1%8F-luxshop-ml-%D1%80%D0%B5%D0%B7%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%82%D1%8B">предыдущей статье</a>):</p>
+
+<figure >
+<img width="590" height="578" class="lazy" src="shop_summary_lr.png"
+      data-src="shop_summary.png" data-srcset="shop_summary@2x.png 2x">
+  <figcaption><p>Признаки с наибольшим абсолютным влиянием, сайт shop.ml</p>
+</figcaption> 
+</figure>
+
+<p>Решающую роль играет признак <strong>time_since_last</strong>, не зря мы
+включили его! Также выраженное положительное влияние у <strong>pageview_count</strong>
+и <strong><span style="white-space: nowrap;">$\sum$order_total</span></strong> (суммарная стоимость всех заказов посетителя).
+Физический смысл SHAP values: изменение SHAP value на одну единицу
+изменяет ожидаемое количество конверсий в два раза. Т.е. например
+value=2 даёт 4x прирост количества конверсий относительно среднего по сайту
+(в среднем на одного посетителя shop.ml приходится 0.00086 будущих конверсий)</p>
+
+<p>Посмотрим
+на детальные диаграммы:
+<figure >
+<img width="451" height="317" class="lazy" src="shop_time_since_last_lr.png"
+      data-src="shop_time_since_last.png" data-srcset="shop_time_since_last@2x.png 2x">
+  <figcaption><p>С течением времени SHAP value изменяется от +2.5 до -2.5, т.е. ожидаемое
+количество конверсий падает в ~32 раза за 180 дней.</p>
+</figcaption> 
+</figure></p>
+
+<figure >
+<img width="453" height="329" class="lazy" src="shop_pageview_count_lr.png"
+      data-src="shop_pageview_count.png" data-srcset="shop_pageview_count@2x.png 2x">
+  <figcaption><p>Количество будущих конверсий начинает расти после просмотра 4-x страниц. Просмотр
+более 30 страниц вызывает рост кол-ва конверсий примерно в 4 раза.</p>
+</figcaption> 
+</figure>
+
+<figure >
+<img width="461" height="328" class="lazy" src="shop_order_total_lr.png"
+      data-src="shop_order_total.png" data-srcset="shop_order_total@2x.png 2x">
+  <figcaption><p>Клиенты, которые заказывали много, продолжат делать заказы &ndash; видна выраженная
+зависимость ожидаемого кол-ва конверсий от суммы заказов.</p>
+</figcaption> 
+</figure>
+
+<p>В этой модели нам интересны не столько зависимости от признаков, сколько результаты
+прогноза. Чтобы лучше понять, что предсказывает модель, разобьём
+тестовую выборку на несколько групп, в соответствии со значением целевой переменной:</p>
+
+<ul>
+<li>0 конверсий</li>
+<li>1 конверсия</li>
+<li>2 конверсии</li>
+<li>3 конверсии</li>
+<li>от 4 до 5 конверсий</li>
+<li>более 5 конверсий</li>
+</ul>
+
+<p>и будем смотреть, насколько точным получается прогноз для каждой группы.</p>
+
+<p><figure >
+<img width="426" height="267" class="lazy" src="shop_num_examples_lr.png"
+      data-src="shop_num_examples.png" data-srcset="shop_num_examples@2x.png 2x">
+  <figcaption><p>Количество примеров в каждой из групп. Группа с нулевой конверсией содержит
+более чем в 1000 раз больше примеров, чем остальные группы (обратите внимание на логарифмическую шкалу).</p>
+</figcaption> 
+</figure>
+Посчитаем среднее прогнозное значение в каждой группе. В идеале средний
+прогноз должен совпасть со средним истинным значением, например для группы
+&ldquo;1 конверсия&rdquo; средний прогноз должен быть равен единице.</p>
+
+<figure >
+<img width="375" height="264" class="lazy" src="shop_raw_forecast_lr.png"
+      data-src="shop_raw_forecast.png" data-srcset="shop_raw_forecast@2x.png 2x">
+  <figcaption><p>Сравнение прогнозных и истинных средних значений в каждой группе.</p>
+</figcaption> 
+</figure>
+
+<p>По графику видно, что чуда не произошло: прогноз и истина не совпадают.
+Форма кривой прогнозных значений в принципе близка к форме кривой
+истинных значений, и также монотонно растёт. Т.е. такие прогнозные значения
+вполне можно использовать, как абстрактную оценку потенциала посетителя,
+и для сравнения посетителей друг с другом. Но для каких либо
+абсолютных оценок (например, сколько конверсий ожидается в конкретном сегменте посетителей?)
+такой прогноз не годится. Впрочем, ситуация легко поправима.</p>
+
+<h2 id="калибровка-прогноза">Калибровка прогноза</h2>
+
+<p>Наша модель предполагает, что значения целевой переменной распределены
+более-менее в соответствии с распределением Пуассона. Посмотрим,
+сколько значений в каждой группе было бы, если бы значения были действительно
+распределены таким образом, т.е. посчитаем вероятное кол-во примеров
+в каждой группе для распределения Пуассона с $\lambda=0.00086$ (среднее кол-во
+конверсий на посетителя):</p>
+
+<figure >
+<img width="423" height="285" class="lazy" src="shop_num_examples_possion_lr.png"
+      data-src="shop_num_examples_possion.png" data-srcset="shop_num_examples_possion@2x.png 2x">
+  
+</figure>
+
+<p>Видно, что наличие 3-х и более конверсий &ndash; крайне маловероятно,
+ожидаемое количество примеров в этих группах приближается к нулю. То есть
+распределение Пуассона не очень хорошо описывает то, что происходит в реальной жизни.
+Количество примеров с нулевой конверсией в наших данных настолько велико, что они
+&ldquo;перетягивают одеяло на себя&rdquo;, модель считает отличное от нуля значение маловероятным,
+и занижает прогноз для примеров, в которых ожидается ненулевое количество конверсий. Это видно
+и на распределении прогнозных значений:
+<figure >
+<img width="387" height="264" class="lazy" src="shop_forecast_distribution_lr.png"
+      data-src="shop_forecast_distribution.png" data-srcset="shop_forecast_distribution@2x.png 2x">
+  <figcaption><p>Сравнение распределений истинных и прогнозных значений. Видно, что прогнозные значения &ldquo;прижаты&rdquo; влево,
+в область меньших величин.</p>
+</figcaption> 
+</figure></p>
+
+<p>В принципе можно было бы подобрать вместо распределения Пуассона другое,
+с более тяжелым &ldquo;хвостом&rdquo; справа (fat-tailed), например что нибудь из семейства
+<a href="https://ru.wikipedia.org/wiki/%D0%A0%D0%B0%D1%81%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5_%D0%9F%D0%B0%D1%80%D0%B5%D1%82%D0%BE" target="_blank">распределений Парето</a>.
+Мы пойдем более простым путём, и просто применим к прогнозам преобразование,
+которое приведёт их к правильному масштабу. Поиск и использование
+такого преобразования называется <em><a href="https://en.wikipedia.org/wiki/Calibration_(statistics)#In_regression" target="_blank">калибровкой модели</a></em>.</p>
+
+<p>Существуют разнообразные методики калибровки различной степени сложности,
+включая даже обучение отдельной модели, которая будет получать на вход
+прогнозы исходной модели и выдавать откалиброванный прогноз. Но мы не
+будем мудрить, у нас уже почти правильный прогноз, достаточно просто
+домножить его на константу и немного скорректировать форму &ldquo;загиба&rdquo; в
+конце кривой:
+$$y^* = \hat{y}^{\beta}k $$
+где $\hat{y}$ &ndash; исходный прогноз; $y^*$ &ndash; калиброванный прогноз; $k, \beta$ &ndash;
+коэффициенты, минимизирующие ошибку прогноза, и подбираемые с помощью кросс-валидации.</p>
+
+<p>После калибровки получается такой график:</p>
+
+<figure >
+<img width="375" height="264" class="lazy" src="shop_calibrated_forecast_lr.png"
+      data-src="shop_calibrated_forecast.png" data-srcset="shop_calibrated_forecast@2x.png 2x">
+  
+</figure>
+
+<p>Стало намного лучше! Такой прогноз уже вполне можно использовать
+для абсолютной оценки потенциала сегмента аудитории.</p>
+
+<h3 id="индивидуальные-прогнозы">Индивидуальные прогнозы</h3>
+
+<p>Мы рассматривали <em>средний</em> прогноз для аудиторного сегмента, а что
+с прогнозами на уровне отдельных посетителей, насколько они хороши? Чтобы
+получить представление об этом, построим распределения прогнозных
+значений отдельно для каждой группы:</p>
+
+<figure >
+<img width="407" height="352" class="lazy" src="shop_forecast_per_bucket_lr.png"
+      data-src="shop_forecast_per_bucket.png" data-srcset="shop_forecast_per_bucket@2x.png 2x">
+  
+</figure>
+
+<p>В идеале все распределения должны быть узкими, вытянутыми по вертикали вдоль
+истинного значения. В реальности распределения достаточно размыты:
+для истинного значения <strong>1 конверсия</strong> 90% прогнозов находится в интервале
+от 0.02 до 3.9; для значения <strong>3 конверсии</strong> &ndash; в интервале от 0.4 до 8.6.</p>
+
+<p>Таким образом, совсем точного персонального прогноза не получается: для этого
+потребовалась бы настоящая машина времени, которая заглянет в будущее,
+и скажет, какое решение, покупать или не покупать, примет посетитель. Но если делать
+групповой прогноз, то ошибки &ldquo;в плюс&rdquo; и &ldquo;в минус&rdquo; нейтрализуют
+друг друга, и точность значительно вырастает.</p>
+
+<h2 id="прогноз-суммы-заказов-shop-ml">Прогноз суммы заказов, shop.ml</h2>
+
+<p>Используется точно такая же модель, как и для прогноза конверсий,
+заменяется только целевая переменная. По своим характеристикам модель
+получается очень похожей на предыдущую, остановимся только на отличиях:
+<figure >
+<img width="387" height="275" class="lazy" src="shop_forecast_distribution_price_lr.png"
+      data-src="shop_forecast_distribution_price.png" data-srcset="shop_forecast_distribution_price@2x.png 2x">
+  <figcaption><p>Сравнение распределений истинных и прогнозных значений. Распределение истинных
+значений принципиально отличается от прогнозных.</p>
+</figcaption> 
+</figure>
+В магазине не бывает заказов стоимостью рубль, и не бывает заказов
+стоимостью десять рублей, но ноль &ndash; это допустимое значение,
+соответствующее отсутствию заказов. В результате получается
+бимодальное распределение, с одиночным пиком в районе нуля, и &ldquo;куполом&rdquo;
+в районе 100-100000 руб. Естественно, распределение Пуассона не может
+принять такую сложную форму, поэтому распределение прогнозов
+сильно отличается от распределения истинных значений, и говорить о точном
+прогнозе на индивидуальном уровне здесь уже нет смысла.</p>
+
+<p>Тем не менее, на групповом уровне после калибровки получается очень
+приличный прогноз:</p>
+
+<figure >
+<img width="381" height="265" class="lazy" src="shop_calibrated_forecast_price_lr.png"
+      data-src="shop_calibrated_forecast_price.png" data-srcset="shop_calibrated_forecast_price@2x.png 2x">
+  <figcaption><p>Прогноз с разбивкой на группы: 0 (нет заказов), 0-2000 руб., 2000-5000 руб.,
+5000-10000 руб., &gt; 10000 руб.</p>
+</figcaption> 
+</figure>
+
+<p>Использование <a href="https://en.wikipedia.org/wiki/Tweedie_distribution" target="_blank">распределения Твиди</a>,
+которое теоретически может быть мультимодальным, дало результат, практически
+не отличающийся от распределения Пуассона. Видимо, чтобы получить
+более правильные прогнозные значения, надо честно смоделировать процесс генерации данных,
+и делать два прогноза, первый &ndash; будут ли вообще заказы, и второй &ndash; сумма
+ожидаемых заказов.</p>
+
+<h2 id="результаты-для-luxshop-ml">Результаты для luxshop.ml</h2>
+
+<p>Тоже получилась очень похожая на предыдущую модель, с близким
+Concordance Index и с аналогичным влиянием признаков на прогноз:
+<figure >
+<img width="634" height="578" class="lazy" src="luxhop_summary_lr.png"
+      data-src="luxhop_summary.png" data-srcset="luxhop_summary@2x.png 2x">
+  <figcaption><p>Признаки с наибольшим абсолютным влиянием, сайт luxshop.ml</p>
+</figcaption> 
+</figure></p>
+
+<figure >
+<img width="380" height="264" class="lazy" src="luxhop_calibrated_forecast_lr.png"
+      data-src="luxhop_calibrated_forecast.png" data-srcset="luxhop_calibrated_forecast@2x.png 2x">
+  
+</figure>
+
+<p>Ошибка предсказания после калибровки получилась немного больше, чем у shop.ml, возможно
+потому, что у luxshop.ml в целом меньше данных и меньше размеры
+групп, например в группе &ldquo;2 конверсии&rdquo; всего 116 посетителей,
+в отличие от 483 у shop.ml.</p>
+
+<h2 id="результаты-для-courses-ml">Результаты для courses.ml</h2>
+
+<p>На этом сайте нет целей типа &ldquo;заказ&rdquo;, поэтому будем предсказывать
+не количество конверсий, а количество сессий за следующие 60 дней.
+Concordance Index этой модели 90%, несколько хуже, чем у магазинов.</p>
+
+<p><figure >
+<img width="626" height="578" class="lazy" src="courses_summary_lr.png"
+      data-src="courses_summary.png" data-srcset="courses_summary@2x.png 2x">
+  <figcaption><p>Признаки с наибольшим абсолютным влиянием, сайт courses.ml</p>
+</figcaption> 
+</figure>
+Как и в других моделях, наибольшее влияние оказывает признак <strong>time_since_last</strong>.
+Но набор остальных признаков, оказывающих заметное влияние, несколько иной.</p>
+
+<p><figure >
+<img width="382" height="264" class="lazy" src="courses_calibrated_forecast_lr.png"
+      data-src="courses_calibrated_forecast.png" data-srcset="courses_calibrated_forecast@2x.png 2x">
+  
+</figure>
+Эта модель чуть хуже поддаётся калибровке, чем модели магазинов, но результат
+всё равно приемлемый.</p>
+
+<figure >
+<img width="407" height="352" class="lazy" src="courses_forecast_per_bucket_lr.png"
+      data-src="courses_forecast_per_bucket.png" data-srcset="courses_forecast_per_bucket@2x.png 2x">
+  
+</figure>
+
+<p>Дисперсия прогнозов внутри каждой группы выше, чем при прогнозе конверсий. Например, для
+группы &ldquo;1 сессия&rdquo; 90% прогнозов лежит в диапазоне [0.0015, 5.7], в то время
+как для shop.ml аналогичный диапазон &ldquo;1 конверсия&rdquo; более узкий: [0.02, 3.9]. То есть предсказывать
+количество будущих сессий сложнее, чем количество конверсий.</p>
+
+<h2 id="scorecards">Scorecards</h2>
+
+<figure >
+<img width="552" height="612" class="lazy" src="shop_scorecards_lr.png"
+      data-src="shop_scorecards.png" data-srcset="shop_scorecards@2x.png 2x">
+  <figcaption><p>Образцы scorecards для прогноза количества конверсий на сайте shop.ml.
+Одному делению шкалы соответствует изменение количества конверсий в 2 раза.</p>
+</figcaption> 
+</figure>
+
+<p>Одно из преимуществ применяемого нами подхода это то, что прогноз
+не является чёрным ящиком, или предсказанием, волшебным образом
+появившимся из недр модели. Ведь довольно трудно принимать бизнес-решения
+на основе непонятной AI магии. А вдруг модель ошибается? Вдруг на вход
+пришли такие данные, с которыми модель не обучена работать?</p>
+
+<p>Но благодаря наличию <a href="../conversion_factors#shap">SHAP values</a>, работа модели становится абсолютно
+прозрачной. Достаточно просто посмотреть на scorecard, чтобы понять,
+<em>почему</em> для данного посетителя выдан такой прогноз, и соотнести решение,
+принятое моделью, с собственным опытом и здравым смыслом. Это не оставляет
+места никакой магии: есть обоснование решений, можно или согласиться с ним,
+или не согласиться и перестать использовать модель (или отправить
+модель на переобучение).</p>
+
+<p>Кстати, не до конца решенная проблема в машинном обучении &ndash; это проверка
+и тестирование всего конвейера подготовки данных для модели. В коде
+легко допустить ошибку, которая будет совершенно невидима извне, и
+единственное её проявление будет в ухудшении качества работы модели. Но заметить
+это ухудшение очень сложно, т.к. нет эталона качества.
+SHAP values помогают и здесь: за время подготовки моделей для этих статей
+я обнаружил с помощью SHAP-диаграмм несколько серьезных ошибок, которые
+в противном случае надолго (возможно навсегда) остались бы незамеченными.</p>
+
+<figure >
+<img width="742" height="464" class="lazy" src="howmuch_lr.png"
+      data-src="howmuch.png" data-srcset="howmuch@2x.png 2x">
+  
+</figure>
+
+<h1 id="заключение">Заключение</h1>
+
+<p>Мы убедились в том, что прогноз будущих конверсий и CLV для посетителей
+сайта вполне возможен и даёт пригодные для практического использования
+результаты даже на несложных моделях.</p>
+
+<p>Конечно, это модели еще не пригодны для применения в production, есть
+ещё много вещей, которые можно сделать лучше.
+В частности, мы использовали весьма простое конструирование признаков:
+всего два уровня адресов страниц; игнорировали содержащиеся в URL
+параметры, которые могут нести ценную информацию о действиях посетителя;
+никак не разделяли действия, которые были совершены недавно и действия,
+которые были в далёком прошлом;
+использовали из данных о заказах только сумму заказа; не обращали внимания
+на последовательность действий (брали только суммарное их количество).</p>
+
+<p>Также использовался ограниченный набор входных данных: у нас не было
+ни соцдема, ни поисковых фраз, ни внутренней информации о посетителях,
+которая содержится в CRM магазина, ни информации о взаимодействии с
+сайтом на интерфейсном уровне, подобной той, которую собирает WebVisor.
+Если задействовать больше данных, то прогнозы, естественно, станут
+более точными.</p>
+
+<p>Структура данных о действиях посетителей в принципе очень близка
+к структуре данных о действиях пользователей мобильных приложений, т.е.
+аналогичные модели можно использовать и для работы с CLV в монетизируемых
+приложениях и играх.</p>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/conversion/">Conversion</a>
+  
+  <a class="badge badge-light" href="/tags/clv/">CLV</a>
+  
+  <a class="badge badge-light" href="/tags/lifetime-value/">Lifetime Value</a>
+  
+</div>
+
+
+
+    
+
+
+
+
+
+
+<div class="media author-card" itemscope itemtype="http://schema.org/Person">
+  
+  <img class="portrait mr-3" src="/img/me_sq.jpg" itemprop="image" alt="Avatar">
+  
+  <div class="media-body">
+    <h5 class="card-title" itemprop="name"><a href="/">Артур Суилин</a></h5>
+    <h6 class="card-subtitle">Chief Data Scientist</h6>
+    
+    <ul class="network-icon" aria-hidden="true">
+      
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="//www.linkedin.com/in/suilin-arthur-304b8219/" target="_blank" rel="noopener">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="//github.com/Arturus" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="//www.kaggle.com/asuilin" target="_blank" rel="noopener">
+          <i class="fab fa-kaggle"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="//instagram.com/asuilin" target="_blank" rel="noopener">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+    <div class="article-widget">
+      <div class="hr-light"></div>
+      <h3>Related</h3>
+      <ul>
+        
+        <li><a href="/post/conversion_history/">Конверсия и data science IV. Кто владеет прошлым, тот контролирует будущее</a></li>
+        
+        <li><a href="/post/conversion_factors/">Конверсия и data science III. Как отличить хорошее от плохого?</a></li>
+        
+        <li><a href="/post/conversion_opt/">Конверсия и data science II. Оптимизируем неизвестность</a></li>
+        
+        <li><a href="/post/conversion_numbers/">Конверсия и data science I. Как увидеть невидимое.</a></li>
+        
+      </ul>
+    </div>
+    
+
+    
+    <div class="article-widget">
+      <div class="post-nav">
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="https://suilin.ru/post/user_churn/" rel="next">Конверсия и data science VI. Клиент скорее жив, чем мёртв?</a>
+  </div>
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="https://suilin.ru/post/conversion_history/" rel="prev">Конверсия и data science IV. Кто владеет прошлым, тот контролирует будущее</a>
+  </div>
+  
+</div>
+
+    </div>
+    
+
+    
+
+
+  </div>
+</article>
+
+<div class="container">
+  <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    &copy; 2018 &middot; Артур Суилин &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+</div>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+    
+    
+    <script src="/js/mathjax-config.500a6cbb2c0f345fcecc21b3116d6637aa78f1f11db8081ea581abe05390c2e8f3bbffe61be3cf0217baf785c40efceabe51050a4f007e69af94efd3643260e8.js" integrity="sha512-UApsuywPNF/OzCGzEW1mN6p48fEduAgepYGr4FOQwujzu//mG&#43;PPAhe694XEDvzqvlEFCk8AfmmvlO/TZDJg6A=="></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    <script src="/js/hugo-academic.js"></script>
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    <script>
+      
+      window.lazyLoadOptions = {elements_selector: ".lazy"};
+    </script>
+    <script async src="https://cdn.jsdelivr.net/npm/intersection-observer@0.5.1/intersection-observer.js"></script>
+    <script async src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@11.0.5/dist/lazyload.min.js"></script>
+
+  </body>
+</html>
+

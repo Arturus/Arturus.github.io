@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/post/clickhouse_driver/</loc>
+      <lastmod>2019-04-30T00:00:00+03:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/post/user_churn/</loc>
+      <lastmod>2019-04-15T00:00:00+03:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/post/clv/</loc>
+      <lastmod>2019-03-20T00:00:00+03:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/post/conversion_history/</loc>
+      <lastmod>2019-03-18T00:00:00+03:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/post/conversion_factors/</loc>
+      <lastmod>2019-02-15T00:00:00+03:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/post/conversion_opt/</loc>
+      <lastmod>2018-12-21T00:00:00+03:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/post/conversion_numbers/</loc>
+      <lastmod>2018-12-20T00:00:00+03:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/post/sampling_performance/</loc>
+      <lastmod>2018-12-10T00:00:00+03:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/project/post_time/</loc>
+      <lastmod>2018-11-27T00:00:00+03:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/post/pandas_column/</loc>
+      <lastmod>2018-10-20T00:00:00+03:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/project/gender_age/</loc>
+      <lastmod>2018-08-27T00:00:00+03:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/project/topic_tensor/</loc>
+      <lastmod>2018-06-27T00:00:00+03:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/project/geo/</loc>
+      <lastmod>2018-06-27T00:00:00+03:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/tags/clv/</loc>
+      <lastmod>2019-03-20T00:00:00+03:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <xhtml:link rel="alternate" href="https://suilin.ru/categories/" hreflang="ru"/>
+      <xhtml:link rel="alternate" href="https://suilin.me/categories/" hreflang="en"/>
+    
+      <loc>https://suilin.ru/categories/</loc>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/tags/churn-prediction/</loc>
+      <lastmod>2019-04-15T00:00:00+03:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/tags/clickhouse/</loc>
+      <lastmod>2019-04-30T00:00:00+03:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/tags/conversion/</loc>
+      <lastmod>2019-03-20T00:00:00+03:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/tags/deep.social/</loc>
+      <lastmod>2018-11-27T00:00:00+03:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/tags/gpu/</loc>
+      <lastmod>2018-12-10T00:00:00+03:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/tags/instagram/</loc>
+      <lastmod>2018-11-27T00:00:00+03:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/categories/internet-analytics/</loc>
+      <lastmod>2019-04-15T00:00:00+03:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/tags/lifetime-value/</loc>
+      <lastmod>2019-03-20T00:00:00+03:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/tags/mab/</loc>
+      <lastmod>2018-12-21T00:00:00+03:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/tags/mkl/</loc>
+      <lastmod>2018-12-10T00:00:00+03:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/tags/pandas/</loc>
+      <lastmod>2018-10-20T00:00:00+03:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/categories/performance/</loc>
+      <lastmod>2018-12-10T00:00:00+03:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/tags/performance/</loc>
+      <lastmod>2019-04-30T00:00:00+03:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/categories/programming/</loc>
+      <lastmod>2019-04-30T00:00:00+03:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <xhtml:link rel="alternate" href="https://suilin.ru/publication_types/" hreflang="ru"/>
+      <xhtml:link rel="alternate" href="https://suilin.me/publication_types/" hreflang="en"/>
+    
+      <loc>https://suilin.ru/publication_types/</loc>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/tags/pymc3/</loc>
+      <lastmod>2018-12-10T00:00:00+03:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/tags/python/</loc>
+      <lastmod>2019-04-30T00:00:00+03:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/tags/pytorch/</loc>
+      <lastmod>2018-12-10T00:00:00+03:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/tags/survival-analysis/</loc>
+      <lastmod>2019-04-15T00:00:00+03:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <xhtml:link rel="alternate" href="https://suilin.ru/tags/" hreflang="ru"/>
+      <xhtml:link rel="alternate" href="https://suilin.me/tags/" hreflang="en"/>
+    
+      <loc>https://suilin.ru/tags/</loc>
+      <lastmod>2019-03-20T00:00:00+03:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/tags/tensorflow/</loc>
+      <lastmod>2018-12-10T00:00:00+03:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/tags/distribution/</loc>
+      <lastmod>2018-12-10T00:00:00+03:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/tags/numpy/</loc>
+      <lastmod>2018-12-10T00:00:00+03:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/tags/sampling/</loc>
+      <lastmod>2018-12-10T00:00:00+03:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/tags/scipy/</loc>
+      <lastmod>2018-12-10T00:00:00+03:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <xhtml:link rel="alternate" href="https://suilin.ru/" hreflang="ru"/>
+      <xhtml:link rel="alternate" href="https://suilin.me/" hreflang="en"/>
+    
+      <loc>https://suilin.ru/</loc>
+      <lastmod>2019-04-30T00:00:00+03:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/post/</loc>
+      <lastmod>2019-04-30T00:00:00+03:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>https://suilin.ru/project/</loc>
+      <lastmod>2018-11-27T00:00:00+03:00</lastmod>
+    </url>
+    
+  
+</urlset>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pytorch on Артур Суилин</title>
+    <link>https://suilin.ru/tags/pytorch/</link>
+    <description>Recent content in Pytorch on Артур Суилин</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ru</language>
+    <copyright>&amp;copy; 2018 &amp;middot; Артур Суилин</copyright>
+    <lastBuildDate>Mon, 10 Dec 2018 00:00:00 +0300</lastBuildDate>
+    
+	<atom:link href="https://suilin.ru/tags/pytorch/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Эффективное сэмплирование распределений на Python</title>
+      <link>https://suilin.ru/post/sampling_performance/</link>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0300</pubDate>
+      
+      <guid>https://suilin.ru/post/sampling_performance/</guid>
+      <description>th { text-align: right; }  В ходе работы над последним проектом мне понадобилось в промышленных масштабах генерировать сэмплы из бета-распределения. Первое что пришло в голову, это scipy.stat, тем более там есть куча дополнительных возможностей: и CDF, и квантили, и MLE, и всё, что душа пожелает. Но довольно быстро я понял, что scipy нетороплив, и генерация нескольких миллиардов сэмплов затянется на часы, а то и на дни. Стал искать альтернативные варианты и хочу теперь поделиться найденным.</description>
+    </item>
+    
+  </channel>
+</rss>

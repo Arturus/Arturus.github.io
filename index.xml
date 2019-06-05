@@ -1448,7 +1448,7 @@ $\sum[path_i=X]$, у которой опущены для краткости к�
 
 &lt;p&gt;Чтобы стало понятнее, рассмотрим несколько топовых признаков по отдельности.&lt;/p&gt;
 
-&lt;h3 id=&#34;hahahugoshortcode-0xc001388a00-9-hbhb&#34;&gt;&lt;span style=&#34;white-space: nowrap;&#34;&gt;$\sum$path&lt;sub&gt;1&lt;/sub&gt;=/basket/&lt;/span&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;hahahugoshortcode-0xc000cf6f00-9-hbhb&#34;&gt;&lt;span style=&#34;white-space: nowrap;&#34;&gt;$\sum$path&lt;sub&gt;1&lt;/sub&gt;=/basket/&lt;/span&gt;&lt;/h3&gt;
 
 &lt;figure style=&#34;margin-top: 0; margin-bottom: 0&#34;&gt;
 &lt;img width=&#34;407&#34; height=&#34;79&#34; class=&#34;lazy&#34; src=&#34;single_f_0_lr.png&#34;
@@ -1573,7 +1573,7 @@ X=0, выстроились бы в узкую вертикальную поло
 
 &lt;p&gt;Прослеживается также интересное взаимодействие со вторым признаком.&lt;/p&gt;
 
-&lt;h3 id=&#34;hahahugoshortcode-0xc001388a00-18-hbhb&#34;&gt;&lt;span style=&#34;white-space: nowrap;&#34;&gt;$\sum$path&lt;sub&gt;2&lt;/sub&gt;=∅&lt;/span&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;hahahugoshortcode-0xc000cf6f00-18-hbhb&#34;&gt;&lt;span style=&#34;white-space: nowrap;&#34;&gt;$\sum$path&lt;sub&gt;2&lt;/sub&gt;=∅&lt;/span&gt;&lt;/h3&gt;
 
 &lt;p&gt;Это значение признака интерпретируется, как
 количество раз, когда посетитель заходил на &amp;ldquo;топовые&amp;rdquo; страницы
@@ -1608,7 +1608,7 @@ X=0, выстроились бы в узкую вертикальную поло
 &lt;p&gt;Дальше будем рассматривать только развёрнутые диаграммы, т.к. дано
 уже достаточно примеров интерпретации мини-графиков.&lt;/p&gt;
 
-&lt;h3 id=&#34;hahahugoshortcode-0xc001388a00-21-hbhb&#34;&gt;&lt;span style=&#34;white-space: nowrap;&#34;&gt;$\sum$pageview_duration&lt;/span&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;hahahugoshortcode-0xc000cf6f00-21-hbhb&#34;&gt;&lt;span style=&#34;white-space: nowrap;&#34;&gt;$\sum$pageview_duration&lt;/span&gt;&lt;/h3&gt;
 
 &lt;figure &gt;
 &lt;img width=&#34;468&#34; height=&#34;329&#34; class=&#34;lazy&#34; src=&#34;sum_pageview_duration_luxshop_lr.png&#34;
@@ -1621,7 +1621,7 @@ X=0, выстроились бы в узкую вертикальную поло
 сайт магазина более 6 часов, видимо используют его, просто как источник
 для вдохновения.&lt;/p&gt;
 
-&lt;h3 id=&#34;hahahugoshortcode-0xc001388a00-23-hbhb&#34;&gt;&lt;span style=&#34;white-space: nowrap;&#34;&gt;$\sum$path&lt;sub&gt;1&lt;/sub&gt;=/delivery/&lt;/span&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;hahahugoshortcode-0xc000cf6f00-23-hbhb&#34;&gt;&lt;span style=&#34;white-space: nowrap;&#34;&gt;$\sum$path&lt;sub&gt;1&lt;/sub&gt;=/delivery/&lt;/span&gt;&lt;/h3&gt;
 
 &lt;figure &gt;
 &lt;img width=&#34;464&#34; height=&#34;332&#34; class=&#34;lazy&#34; src=&#34;sum_path1_delivery_luxshop_lr.png&#34;
@@ -1835,7 +1835,7 @@ $$\DeclareMathOperator{\E}{E}$$&lt;/p&gt;
   
 &lt;/figure&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;hahahugoshortcode-0xc001388a00-48-hbhb&#34;&gt;&lt;span style=&#34;white-space: nowrap;&#34;&gt;$\sum$pageview_duration&lt;/span&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;hahahugoshortcode-0xc000cf6f00-48-hbhb&#34;&gt;&lt;span style=&#34;white-space: nowrap;&#34;&gt;$\sum$pageview_duration&lt;/span&gt;&lt;/h3&gt;
 
 &lt;p&gt;Более всего на результат влияет суммарное время просмотра страниц, т.е.
 модель предполагает, что если посетитель уже потратил заметное количество времени на обучение,

@@ -6,8 +6,8 @@
     <description>Recent content in Conversion on Артур Суилин</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ru</language>
-    <copyright>&amp;copy; 2018 &amp;middot; Артур Суилин</copyright>
-    <lastBuildDate>Wed, 20 Mar 2019 00:00:00 +0300</lastBuildDate>
+    <copyright>&amp;copy; 2015-2022 &amp;middot; Артур Суилин</copyright>
+    <lastBuildDate>Wed, 20 Mar 2019 00:00:00 +0400</lastBuildDate>
     
 	<atom:link href="https://suilin.ru/tags/conversion/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Конверсия и data science V. А сколько корова даёт молока?</title>
       <link>https://suilin.ru/post/clv/</link>
-      <pubDate>Wed, 20 Mar 2019 00:00:00 +0300</pubDate>
+      <pubDate>Wed, 20 Mar 2019 00:00:00 +0400</pubDate>
       
       <guid>https://suilin.ru/post/clv/</guid>
       <description>В идеальном мире маркетолог или владелец бизнеса не только работает с &amp;ldquo;конверсиями&amp;rdquo;, но использует для оценки посетителей сайта Customer Lifetime Value (сокращённо CLV) &amp;ndash; грубо говоря, это сумма денег, которую принесёт посетитель за всё время, пока будет пользоваться сервисом. Оценка клиентов по CLV является предпочтительной и для мобильных приложений, и для игр, и для любых онлайн сервисов.
@@ -25,7 +25,7 @@
     <item>
       <title>Конверсия и data science IV. Кто владеет прошлым, тот контролирует будущее</title>
       <link>https://suilin.ru/post/conversion_history/</link>
-      <pubDate>Mon, 18 Mar 2019 00:00:00 +0300</pubDate>
+      <pubDate>Mon, 18 Mar 2019 00:00:00 +0400</pubDate>
       
       <guid>https://suilin.ru/post/conversion_history/</guid>
       <description>В предыдущей статье мы рассмотрели самую простую модель оценки конверсионности посетителя по параметрам первого посещения. Благодаря использованию SHAP values можно интерпретировать модели любой сложности, поэтому усложним задачу, и оценим конверсионность посетителя, у которого есть история предыдущего взаимодействия с сайтом.
@@ -35,7 +35,7 @@
     <item>
       <title>Конверсия и data science III. Как отличить хорошее от плохого?</title>
       <link>https://suilin.ru/post/conversion_factors/</link>
-      <pubDate>Fri, 15 Feb 2019 00:00:00 +0300</pubDate>
+      <pubDate>Fri, 15 Feb 2019 00:00:00 +0400</pubDate>
       
       <guid>https://suilin.ru/post/conversion_factors/</guid>
       <description>$$\DeclareMathOperator{\E}{E}$$ Как понять, что влияет на конверсию положительно, а что отрицательно? В любом отчёте Google Analytics или Я.Метрики есть столбец &amp;ldquo;конверсия&amp;rdquo;, и сравнив конверсию в разных строках отчёта, казалось бы, можно получить исчерпывающий ответ.
@@ -45,7 +45,7 @@
     <item>
       <title>Конверсия и data science II. Оптимизируем неизвестность</title>
       <link>https://suilin.ru/post/conversion_opt/</link>
-      <pubDate>Fri, 21 Dec 2018 00:00:00 +0300</pubDate>
+      <pubDate>Fri, 21 Dec 2018 00:00:00 +0400</pubDate>
       
       <guid>https://suilin.ru/post/conversion_opt/</guid>
       <description>При управлении онлайновыми рекламными кампаниями при подключении новых источников (объявлений, баннеров, SMM и т.п.) часто приходится решать проблему:
@@ -55,7 +55,7 @@
     <item>
       <title>Конверсия и data science I. Как увидеть невидимое.</title>
       <link>https://suilin.ru/post/conversion_numbers/</link>
-      <pubDate>Thu, 20 Dec 2018 00:00:00 +0300</pubDate>
+      <pubDate>Thu, 20 Dec 2018 00:00:00 +0400</pubDate>
       
       <guid>https://suilin.ru/post/conversion_numbers/</guid>
       <description>Введение Этой статьей я начинаю цикл о проблемах Интернет-аналитики (аналитики в широком смысле: аналитика сайтов, аналитика мобильных приложений, игровая аналитика и т.п.) и возможных способах их решения с позиций современного data science. Над этими проблемами я начал размышлять давно, ещё когда делал свои первые проекты по интернет-аналитике, а потом когда создавал Вебвизор и работал в Яндекс.Метрике. Но до практического их решения я добрался только сейчас, когда появилось время на изучение нужной литературы и расширение своего кругозора.</description>

@@ -6,14 +6,14 @@
     <description>Recent content in Артур Суилин on Артур Суилин</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ru</language>
-    <copyright>&amp;copy; 2018 &amp;middot; Артур Суилин</copyright>
-    <lastBuildDate>Tue, 30 Apr 2019 00:00:00 +0300</lastBuildDate>
+    <copyright>&amp;copy; 2015-2022 &amp;middot; Артур Суилин</copyright>
+    <lastBuildDate>Tue, 30 Apr 2019 00:00:00 +0400</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Ускоряем драйвер ClickHouse</title>
       <link>https://suilin.ru/post/clickhouse_driver/</link>
-      <pubDate>Tue, 30 Apr 2019 00:00:00 +0300</pubDate>
+      <pubDate>Tue, 30 Apr 2019 00:00:00 +0400</pubDate>
       
       <guid>https://suilin.ru/post/clickhouse_driver/</guid>
       <description>
@@ -160,7 +160,7 @@ ClickHouse c дефолтными настройками драйвера.&lt;/p
     <item>
       <title>Конверсия и data science VI. Клиент скорее жив, чем мёртв?</title>
       <link>https://suilin.ru/post/user_churn/</link>
-      <pubDate>Mon, 15 Apr 2019 00:00:00 +0300</pubDate>
+      <pubDate>Mon, 15 Apr 2019 00:00:00 +0400</pubDate>
       
       <guid>https://suilin.ru/post/user_churn/</guid>
       <description>
@@ -584,7 +584,7 @@ courses.ml:
     <item>
       <title>Конверсия и data science V. А сколько корова даёт молока?</title>
       <link>https://suilin.ru/post/clv/</link>
-      <pubDate>Wed, 20 Mar 2019 00:00:00 +0300</pubDate>
+      <pubDate>Wed, 20 Mar 2019 00:00:00 +0400</pubDate>
       
       <guid>https://suilin.ru/post/clv/</guid>
       <description>
@@ -1110,7 +1110,7 @@ SHAP values помогают и здесь: за время подготовки
     <item>
       <title>Конверсия и data science IV. Кто владеет прошлым, тот контролирует будущее</title>
       <link>https://suilin.ru/post/conversion_history/</link>
-      <pubDate>Mon, 18 Mar 2019 00:00:00 +0300</pubDate>
+      <pubDate>Mon, 18 Mar 2019 00:00:00 +0400</pubDate>
       
       <guid>https://suilin.ru/post/conversion_history/</guid>
       <description>
@@ -1448,7 +1448,7 @@ $\sum[path_i=X]$, у которой опущены для краткости к�
 
 &lt;p&gt;Чтобы стало понятнее, рассмотрим несколько топовых признаков по отдельности.&lt;/p&gt;
 
-&lt;h3 id=&#34;hahahugoshortcode-0xc000cf6f00-9-hbhb&#34;&gt;&lt;span style=&#34;white-space: nowrap;&#34;&gt;$\sum$path&lt;sub&gt;1&lt;/sub&gt;=/basket/&lt;/span&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;hahahugoshortcode-0xc00129c000-9-hbhb&#34;&gt;&lt;span style=&#34;white-space: nowrap;&#34;&gt;$\sum$path&lt;sub&gt;1&lt;/sub&gt;=/basket/&lt;/span&gt;&lt;/h3&gt;
 
 &lt;figure style=&#34;margin-top: 0; margin-bottom: 0&#34;&gt;
 &lt;img width=&#34;407&#34; height=&#34;79&#34; class=&#34;lazy&#34; src=&#34;single_f_0_lr.png&#34;
@@ -1573,7 +1573,7 @@ X=0, выстроились бы в узкую вертикальную поло
 
 &lt;p&gt;Прослеживается также интересное взаимодействие со вторым признаком.&lt;/p&gt;
 
-&lt;h3 id=&#34;hahahugoshortcode-0xc000cf6f00-18-hbhb&#34;&gt;&lt;span style=&#34;white-space: nowrap;&#34;&gt;$\sum$path&lt;sub&gt;2&lt;/sub&gt;=∅&lt;/span&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;hahahugoshortcode-0xc00129c000-18-hbhb&#34;&gt;&lt;span style=&#34;white-space: nowrap;&#34;&gt;$\sum$path&lt;sub&gt;2&lt;/sub&gt;=∅&lt;/span&gt;&lt;/h3&gt;
 
 &lt;p&gt;Это значение признака интерпретируется, как
 количество раз, когда посетитель заходил на &amp;ldquo;топовые&amp;rdquo; страницы
@@ -1608,7 +1608,7 @@ X=0, выстроились бы в узкую вертикальную поло
 &lt;p&gt;Дальше будем рассматривать только развёрнутые диаграммы, т.к. дано
 уже достаточно примеров интерпретации мини-графиков.&lt;/p&gt;
 
-&lt;h3 id=&#34;hahahugoshortcode-0xc000cf6f00-21-hbhb&#34;&gt;&lt;span style=&#34;white-space: nowrap;&#34;&gt;$\sum$pageview_duration&lt;/span&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;hahahugoshortcode-0xc00129c000-21-hbhb&#34;&gt;&lt;span style=&#34;white-space: nowrap;&#34;&gt;$\sum$pageview_duration&lt;/span&gt;&lt;/h3&gt;
 
 &lt;figure &gt;
 &lt;img width=&#34;468&#34; height=&#34;329&#34; class=&#34;lazy&#34; src=&#34;sum_pageview_duration_luxshop_lr.png&#34;
@@ -1621,7 +1621,7 @@ X=0, выстроились бы в узкую вертикальную поло
 сайт магазина более 6 часов, видимо используют его, просто как источник
 для вдохновения.&lt;/p&gt;
 
-&lt;h3 id=&#34;hahahugoshortcode-0xc000cf6f00-23-hbhb&#34;&gt;&lt;span style=&#34;white-space: nowrap;&#34;&gt;$\sum$path&lt;sub&gt;1&lt;/sub&gt;=/delivery/&lt;/span&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;hahahugoshortcode-0xc00129c000-23-hbhb&#34;&gt;&lt;span style=&#34;white-space: nowrap;&#34;&gt;$\sum$path&lt;sub&gt;1&lt;/sub&gt;=/delivery/&lt;/span&gt;&lt;/h3&gt;
 
 &lt;figure &gt;
 &lt;img width=&#34;464&#34; height=&#34;332&#34; class=&#34;lazy&#34; src=&#34;sum_path1_delivery_luxshop_lr.png&#34;
@@ -1835,7 +1835,7 @@ $$\DeclareMathOperator{\E}{E}$$&lt;/p&gt;
   
 &lt;/figure&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;hahahugoshortcode-0xc000cf6f00-48-hbhb&#34;&gt;&lt;span style=&#34;white-space: nowrap;&#34;&gt;$\sum$pageview_duration&lt;/span&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;hahahugoshortcode-0xc00129c000-48-hbhb&#34;&gt;&lt;span style=&#34;white-space: nowrap;&#34;&gt;$\sum$pageview_duration&lt;/span&gt;&lt;/h3&gt;
 
 &lt;p&gt;Более всего на результат влияет суммарное время просмотра страниц, т.е.
 модель предполагает, что если посетитель уже потратил заметное количество времени на обучение,
@@ -1998,7 +1998,7 @@ Machine Learning (а сейчас и AI) индустрия традиционн
     <item>
       <title>Конверсия и data science III. Как отличить хорошее от плохого?</title>
       <link>https://suilin.ru/post/conversion_factors/</link>
-      <pubDate>Fri, 15 Feb 2019 00:00:00 +0300</pubDate>
+      <pubDate>Fri, 15 Feb 2019 00:00:00 +0400</pubDate>
       
       <guid>https://suilin.ru/post/conversion_factors/</guid>
       <description>
@@ -2814,7 +2814,7 @@ $2^{4.2} \approx 18.4$ раз, у посетителей &lt;strong&gt;D&lt;/str
     <item>
       <title>Конверсия и data science II. Оптимизируем неизвестность</title>
       <link>https://suilin.ru/post/conversion_opt/</link>
-      <pubDate>Fri, 21 Dec 2018 00:00:00 +0300</pubDate>
+      <pubDate>Fri, 21 Dec 2018 00:00:00 +0400</pubDate>
       
       <guid>https://suilin.ru/post/conversion_opt/</guid>
       <description>
@@ -3983,7 +3983,7 @@ CB Racing соответственно немного меньше. Учитыв
     <item>
       <title>Конверсия и data science I. Как увидеть невидимое.</title>
       <link>https://suilin.ru/post/conversion_numbers/</link>
-      <pubDate>Thu, 20 Dec 2018 00:00:00 +0300</pubDate>
+      <pubDate>Thu, 20 Dec 2018 00:00:00 +0400</pubDate>
       
       <guid>https://suilin.ru/post/conversion_numbers/</guid>
       <description>
@@ -4684,7 +4684,7 @@ with pm.Model() as model:
     <item>
       <title>Эффективное сэмплирование распределений на Python</title>
       <link>https://suilin.ru/post/sampling_performance/</link>
-      <pubDate>Mon, 10 Dec 2018 00:00:00 +0300</pubDate>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0400</pubDate>
       
       <guid>https://suilin.ru/post/sampling_performance/</guid>
       <description>
@@ -5305,7 +5305,7 @@ seed после генерации сэмпла. Seed хранится
     <item>
       <title>Предсказание времени поста в Instagram</title>
       <link>https://suilin.ru/project/post_time/</link>
-      <pubDate>Tue, 27 Nov 2018 00:00:00 +0300</pubDate>
+      <pubDate>Tue, 27 Nov 2018 00:00:00 +0400</pubDate>
       
       <guid>https://suilin.ru/project/post_time/</guid>
       <description>
@@ -5819,7 +5819,7 @@ $$&lt;/p&gt;
     <item>
       <title>Как добавить колонку к pd.DataFrame</title>
       <link>https://suilin.ru/post/pandas_column/</link>
-      <pubDate>Sat, 20 Oct 2018 00:00:00 +0300</pubDate>
+      <pubDate>Sat, 20 Oct 2018 00:00:00 +0400</pubDate>
       
       <guid>https://suilin.ru/post/pandas_column/</guid>
       <description>
@@ -6019,7 +6019,7 @@ df[&#39;column&#39;] = value
     <item>
       <title>Определение пола и возраста по фото</title>
       <link>https://suilin.ru/project/gender_age/</link>
-      <pubDate>Mon, 27 Aug 2018 00:00:00 +0300</pubDate>
+      <pubDate>Mon, 27 Aug 2018 00:00:00 +0400</pubDate>
       
       <guid>https://suilin.ru/project/gender_age/</guid>
       <description>
@@ -7478,7 +7478,7 @@ Auto-Keras&lt;sup&gt;&lt;a href=&#34;#jin2018efficient&#34; id=&#34;jin2018effic
     <item>
       <title>TopicTensor: тематики в Instagram</title>
       <link>https://suilin.ru/project/topic_tensor/</link>
-      <pubDate>Wed, 27 Jun 2018 00:00:00 +0300</pubDate>
+      <pubDate>Wed, 27 Jun 2018 00:00:00 +0400</pubDate>
       
       <guid>https://suilin.ru/project/topic_tensor/</guid>
       <description>
@@ -8176,7 +8176,7 @@ $$score_i = {\sim{input}{\beta_i} \over \log(likes)^\lambda \cdot \log(followers
     <item>
       <title>Определение места жительства Instagram пользователей</title>
       <link>https://suilin.ru/project/geo/</link>
-      <pubDate>Wed, 27 Jun 2018 00:00:00 +0300</pubDate>
+      <pubDate>Wed, 27 Jun 2018 00:00:00 +0400</pubDate>
       
       <guid>https://suilin.ru/project/geo/</guid>
       <description>

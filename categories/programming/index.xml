@@ -6,8 +6,8 @@
     <description>Recent content in Programming on Артур Суилин</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ru</language>
-    <copyright>&amp;copy; 2018 &amp;middot; Артур Суилин</copyright>
-    <lastBuildDate>Tue, 30 Apr 2019 00:00:00 +0300</lastBuildDate>
+    <copyright>&amp;copy; 2015-2022 &amp;middot; Артур Суилин</copyright>
+    <lastBuildDate>Tue, 30 Apr 2019 00:00:00 +0400</lastBuildDate>
     
 	<atom:link href="https://suilin.ru/categories/programming/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Ускоряем драйвер ClickHouse</title>
       <link>https://suilin.ru/post/clickhouse_driver/</link>
-      <pubDate>Tue, 30 Apr 2019 00:00:00 +0300</pubDate>
+      <pubDate>Tue, 30 Apr 2019 00:00:00 +0400</pubDate>
       
       <guid>https://suilin.ru/post/clickhouse_driver/</guid>
       <description>ClickHouse &amp;ndash; самая быстрая в мире аналитическая СУБД. Для тех, кто с ним ещё не знаком, очень рекомендую попробовать, пересаживаться обратно на MySQL или Postgress потом не захочется.
@@ -25,7 +25,7 @@
     <item>
       <title>Эффективное сэмплирование распределений на Python</title>
       <link>https://suilin.ru/post/sampling_performance/</link>
-      <pubDate>Mon, 10 Dec 2018 00:00:00 +0300</pubDate>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0400</pubDate>
       
       <guid>https://suilin.ru/post/sampling_performance/</guid>
       <description>th { text-align: right; }  В ходе работы над последним проектом мне понадобилось в промышленных масштабах генерировать сэмплы из бета-распределения. Первое что пришло в голову, это scipy.stat, тем более там есть куча дополнительных возможностей: и CDF, и квантили, и MLE, и всё, что душа пожелает. Но довольно быстро я понял, что scipy нетороплив, и генерация нескольких миллиардов сэмплов затянется на часы, а то и на дни. Стал искать альтернативные варианты и хочу теперь поделиться найденным.</description>
@@ -34,7 +34,7 @@
     <item>
       <title>Как добавить колонку к pd.DataFrame</title>
       <link>https://suilin.ru/post/pandas_column/</link>
-      <pubDate>Sat, 20 Oct 2018 00:00:00 +0300</pubDate>
+      <pubDate>Sat, 20 Oct 2018 00:00:00 +0400</pubDate>
       
       <guid>https://suilin.ru/post/pandas_column/</guid>
       <description>Введение В Pandas существует по меньшей мере три официальных способа добавить колонку, не включая экзотических:

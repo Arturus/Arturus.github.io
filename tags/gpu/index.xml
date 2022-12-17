@@ -6,8 +6,8 @@
     <description>Recent content in GPU on Артур Суилин</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ru</language>
-    <copyright>&amp;copy; 2018 &amp;middot; Артур Суилин</copyright>
-    <lastBuildDate>Mon, 10 Dec 2018 00:00:00 +0300</lastBuildDate>
+    <copyright>&amp;copy; 2015-2022 &amp;middot; Артур Суилин</copyright>
+    <lastBuildDate>Mon, 10 Dec 2018 00:00:00 +0400</lastBuildDate>
     
 	<atom:link href="https://suilin.ru/tags/gpu/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Эффективное сэмплирование распределений на Python</title>
       <link>https://suilin.ru/post/sampling_performance/</link>
-      <pubDate>Mon, 10 Dec 2018 00:00:00 +0300</pubDate>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0400</pubDate>
       
       <guid>https://suilin.ru/post/sampling_performance/</guid>
       <description>th { text-align: right; }  В ходе работы над последним проектом мне понадобилось в промышленных масштабах генерировать сэмплы из бета-распределения. Первое что пришло в голову, это scipy.stat, тем более там есть куча дополнительных возможностей: и CDF, и квантили, и MLE, и всё, что душа пожелает. Но довольно быстро я понял, что scipy нетороплив, и генерация нескольких миллиардов сэмплов затянется на часы, а то и на дни. Стал искать альтернативные варианты и хочу теперь поделиться найденным.</description>

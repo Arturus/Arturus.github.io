@@ -92,6 +92,9 @@
     
     <url>
     
+      <xhtml:link rel="alternate" href="https://suilin.ru/project/topic_tensor/" hreflang="ru"/>
+      <xhtml:link rel="alternate" href="https://suilin.me/project/topic_tensor/" hreflang="en"/>
+    
       <loc>https://suilin.ru/project/topic_tensor/</loc>
       <lastmod>2018-06-27T00:00:00+04:00</lastmod>
     </url>
@@ -155,6 +158,9 @@
     
     <url>
     
+      <xhtml:link rel="alternate" href="https://suilin.ru/tags/deep.social/" hreflang="ru"/>
+      <xhtml:link rel="alternate" href="https://suilin.me/tags/deep.social/" hreflang="en"/>
+    
       <loc>https://suilin.ru/tags/deep.social/</loc>
       <lastmod>2018-11-27T00:00:00+04:00</lastmod>
       <priority>0</priority>
@@ -172,6 +178,9 @@
   
     
     <url>
+    
+      <xhtml:link rel="alternate" href="https://suilin.ru/tags/instagram/" hreflang="ru"/>
+      <xhtml:link rel="alternate" href="https://suilin.me/tags/instagram/" hreflang="en"/>
     
       <loc>https://suilin.ru/tags/instagram/</loc>
       <lastmod>2018-11-27T00:00:00+04:00</lastmod>
@@ -227,8 +236,8 @@
     
     <url>
     
-      <loc>https://suilin.ru/categories/performance/</loc>
-      <lastmod>2018-12-10T00:00:00+04:00</lastmod>
+      <loc>https://suilin.ru/tags/performance/</loc>
+      <lastmod>2019-04-30T00:00:00+04:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -236,8 +245,8 @@
     
     <url>
     
-      <loc>https://suilin.ru/tags/performance/</loc>
-      <lastmod>2019-04-30T00:00:00+04:00</lastmod>
+      <loc>https://suilin.ru/categories/performance/</loc>
+      <lastmod>2018-12-10T00:00:00+04:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -377,6 +386,9 @@
   
     
     <url>
+    
+      <xhtml:link rel="alternate" href="https://suilin.ru/project/" hreflang="ru"/>
+      <xhtml:link rel="alternate" href="https://suilin.me/project/" hreflang="en"/>
     
       <loc>https://suilin.ru/project/</loc>
       <lastmod>2018-11-27T00:00:00+04:00</lastmod>

@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ru</language>
     <copyright>&amp;copy; 2015-2023 &amp;middot; Артур Суилин</copyright>
-    <lastBuildDate>Wed, 20 Mar 2019 00:00:00 +0400</lastBuildDate>
+    <lastBuildDate>Wed, 20 Mar 2019 00:00:00 +0100</lastBuildDate>
     
 	<atom:link href="https://suilin.ru/tags/lifetime-value/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Конверсия и data science V. А сколько корова даёт молока?</title>
       <link>https://suilin.ru/post/clv/</link>
-      <pubDate>Wed, 20 Mar 2019 00:00:00 +0400</pubDate>
+      <pubDate>Wed, 20 Mar 2019 00:00:00 +0100</pubDate>
       
       <guid>https://suilin.ru/post/clv/</guid>
       <description>В идеальном мире маркетолог или владелец бизнеса не только работает с &amp;ldquo;конверсиями&amp;rdquo;, но использует для оценки посетителей сайта Customer Lifetime Value (сокращённо CLV) &amp;ndash; грубо говоря, это сумма денег, которую принесёт посетитель за всё время, пока будет пользоваться сервисом. Оценка клиентов по CLV является предпочтительной и для мобильных приложений, и для игр, и для любых онлайн сервисов.

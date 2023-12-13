@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ru</language>
     <copyright>&amp;copy; 2015-2023 &amp;middot; Артур Суилин</copyright>
-    <lastBuildDate>Wed, 20 Mar 2019 00:00:00 +0400</lastBuildDate>
+    <lastBuildDate>Wed, 20 Mar 2019 00:00:00 +0100</lastBuildDate>
     
 	<atom:link href="https://suilin.ru/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>CLV</title>
       <link>https://suilin.ru/tags/clv/</link>
-      <pubDate>Wed, 20 Mar 2019 00:00:00 +0400</pubDate>
+      <pubDate>Wed, 20 Mar 2019 00:00:00 +0100</pubDate>
       
       <guid>https://suilin.ru/tags/clv/</guid>
       <description></description>
@@ -24,7 +24,7 @@
     <item>
       <title>Churn prediction</title>
       <link>https://suilin.ru/tags/churn-prediction/</link>
-      <pubDate>Mon, 15 Apr 2019 00:00:00 +0400</pubDate>
+      <pubDate>Mon, 15 Apr 2019 00:00:00 +0200</pubDate>
       
       <guid>https://suilin.ru/tags/churn-prediction/</guid>
       <description></description>
@@ -33,7 +33,7 @@
     <item>
       <title>ClickHouse</title>
       <link>https://suilin.ru/tags/clickhouse/</link>
-      <pubDate>Tue, 30 Apr 2019 00:00:00 +0400</pubDate>
+      <pubDate>Tue, 30 Apr 2019 00:00:00 +0200</pubDate>
       
       <guid>https://suilin.ru/tags/clickhouse/</guid>
       <description></description>
@@ -42,7 +42,7 @@
     <item>
       <title>Conversion</title>
       <link>https://suilin.ru/tags/conversion/</link>
-      <pubDate>Wed, 20 Mar 2019 00:00:00 +0400</pubDate>
+      <pubDate>Wed, 20 Mar 2019 00:00:00 +0100</pubDate>
       
       <guid>https://suilin.ru/tags/conversion/</guid>
       <description></description>
@@ -51,7 +51,7 @@
     <item>
       <title>Deep.Social</title>
       <link>https://suilin.ru/tags/deep.social/</link>
-      <pubDate>Tue, 27 Nov 2018 00:00:00 +0400</pubDate>
+      <pubDate>Tue, 27 Nov 2018 00:00:00 +0100</pubDate>
       
       <guid>https://suilin.ru/tags/deep.social/</guid>
       <description></description>
@@ -60,7 +60,7 @@
     <item>
       <title>GPU</title>
       <link>https://suilin.ru/tags/gpu/</link>
-      <pubDate>Mon, 10 Dec 2018 00:00:00 +0400</pubDate>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0100</pubDate>
       
       <guid>https://suilin.ru/tags/gpu/</guid>
       <description></description>
@@ -69,7 +69,7 @@
     <item>
       <title>Instagram</title>
       <link>https://suilin.ru/tags/instagram/</link>
-      <pubDate>Tue, 27 Nov 2018 00:00:00 +0400</pubDate>
+      <pubDate>Tue, 27 Nov 2018 00:00:00 +0100</pubDate>
       
       <guid>https://suilin.ru/tags/instagram/</guid>
       <description></description>
@@ -78,7 +78,7 @@
     <item>
       <title>Lifetime Value</title>
       <link>https://suilin.ru/tags/lifetime-value/</link>
-      <pubDate>Wed, 20 Mar 2019 00:00:00 +0400</pubDate>
+      <pubDate>Wed, 20 Mar 2019 00:00:00 +0100</pubDate>
       
       <guid>https://suilin.ru/tags/lifetime-value/</guid>
       <description></description>
@@ -87,7 +87,7 @@
     <item>
       <title>MAB</title>
       <link>https://suilin.ru/tags/mab/</link>
-      <pubDate>Fri, 21 Dec 2018 00:00:00 +0400</pubDate>
+      <pubDate>Fri, 21 Dec 2018 00:00:00 +0100</pubDate>
       
       <guid>https://suilin.ru/tags/mab/</guid>
       <description></description>
@@ -96,7 +96,7 @@
     <item>
       <title>MKL</title>
       <link>https://suilin.ru/tags/mkl/</link>
-      <pubDate>Mon, 10 Dec 2018 00:00:00 +0400</pubDate>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0100</pubDate>
       
       <guid>https://suilin.ru/tags/mkl/</guid>
       <description></description>
@@ -105,7 +105,7 @@
     <item>
       <title>Pandas</title>
       <link>https://suilin.ru/tags/pandas/</link>
-      <pubDate>Sat, 20 Oct 2018 00:00:00 +0400</pubDate>
+      <pubDate>Sat, 20 Oct 2018 00:00:00 +0200</pubDate>
       
       <guid>https://suilin.ru/tags/pandas/</guid>
       <description></description>
@@ -114,7 +114,7 @@
     <item>
       <title>Performance</title>
       <link>https://suilin.ru/tags/performance/</link>
-      <pubDate>Tue, 30 Apr 2019 00:00:00 +0400</pubDate>
+      <pubDate>Tue, 30 Apr 2019 00:00:00 +0200</pubDate>
       
       <guid>https://suilin.ru/tags/performance/</guid>
       <description></description>
@@ -123,7 +123,7 @@
     <item>
       <title>PyMC3</title>
       <link>https://suilin.ru/tags/pymc3/</link>
-      <pubDate>Mon, 10 Dec 2018 00:00:00 +0400</pubDate>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0100</pubDate>
       
       <guid>https://suilin.ru/tags/pymc3/</guid>
       <description></description>
@@ -132,7 +132,7 @@
     <item>
       <title>Python</title>
       <link>https://suilin.ru/tags/python/</link>
-      <pubDate>Tue, 30 Apr 2019 00:00:00 +0400</pubDate>
+      <pubDate>Tue, 30 Apr 2019 00:00:00 +0200</pubDate>
       
       <guid>https://suilin.ru/tags/python/</guid>
       <description></description>
@@ -141,7 +141,7 @@
     <item>
       <title>Pytorch</title>
       <link>https://suilin.ru/tags/pytorch/</link>
-      <pubDate>Mon, 10 Dec 2018 00:00:00 +0400</pubDate>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0100</pubDate>
       
       <guid>https://suilin.ru/tags/pytorch/</guid>
       <description></description>
@@ -150,7 +150,7 @@
     <item>
       <title>Survival analysis</title>
       <link>https://suilin.ru/tags/survival-analysis/</link>
-      <pubDate>Mon, 15 Apr 2019 00:00:00 +0400</pubDate>
+      <pubDate>Mon, 15 Apr 2019 00:00:00 +0200</pubDate>
       
       <guid>https://suilin.ru/tags/survival-analysis/</guid>
       <description></description>
@@ -159,7 +159,7 @@
     <item>
       <title>Tensorflow</title>
       <link>https://suilin.ru/tags/tensorflow/</link>
-      <pubDate>Mon, 10 Dec 2018 00:00:00 +0400</pubDate>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0100</pubDate>
       
       <guid>https://suilin.ru/tags/tensorflow/</guid>
       <description></description>
@@ -168,7 +168,7 @@
     <item>
       <title>distribution</title>
       <link>https://suilin.ru/tags/distribution/</link>
-      <pubDate>Mon, 10 Dec 2018 00:00:00 +0400</pubDate>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0100</pubDate>
       
       <guid>https://suilin.ru/tags/distribution/</guid>
       <description></description>
@@ -177,7 +177,7 @@
     <item>
       <title>numpy</title>
       <link>https://suilin.ru/tags/numpy/</link>
-      <pubDate>Mon, 10 Dec 2018 00:00:00 +0400</pubDate>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0100</pubDate>
       
       <guid>https://suilin.ru/tags/numpy/</guid>
       <description></description>
@@ -186,7 +186,7 @@
     <item>
       <title>sampling</title>
       <link>https://suilin.ru/tags/sampling/</link>
-      <pubDate>Mon, 10 Dec 2018 00:00:00 +0400</pubDate>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0100</pubDate>
       
       <guid>https://suilin.ru/tags/sampling/</guid>
       <description></description>
@@ -195,7 +195,7 @@
     <item>
       <title>scipy</title>
       <link>https://suilin.ru/tags/scipy/</link>
-      <pubDate>Mon, 10 Dec 2018 00:00:00 +0400</pubDate>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0100</pubDate>
       
       <guid>https://suilin.ru/tags/scipy/</guid>
       <description></description>

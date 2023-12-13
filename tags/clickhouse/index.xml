@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ru</language>
     <copyright>&amp;copy; 2015-2023 &amp;middot; Артур Суилин</copyright>
-    <lastBuildDate>Tue, 30 Apr 2019 00:00:00 +0400</lastBuildDate>
+    <lastBuildDate>Tue, 30 Apr 2019 00:00:00 +0200</lastBuildDate>
     
 	<atom:link href="https://suilin.ru/tags/clickhouse/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Ускоряем драйвер ClickHouse</title>
       <link>https://suilin.ru/post/clickhouse_driver/</link>
-      <pubDate>Tue, 30 Apr 2019 00:00:00 +0400</pubDate>
+      <pubDate>Tue, 30 Apr 2019 00:00:00 +0200</pubDate>
       
       <guid>https://suilin.ru/post/clickhouse_driver/</guid>
       <description>ClickHouse &amp;ndash; самая быстрая в мире аналитическая СУБД. Для тех, кто с ним ещё не знаком, очень рекомендую попробовать, пересаживаться обратно на MySQL или Postgress потом не захочется.
